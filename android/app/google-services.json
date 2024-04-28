@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "148275058372",
+    "project_id": "tawsel-b004b",
+    "storage_bucket": "tawsel-b004b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148275058372:android:26f63c722149a62f7edb91",
+        "android_client_info": {
+          "package_name": "com.example.food_delivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRqc6X92Z36U77CYgSchnxL8-7ZqkMHoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:148275058372:android:3b51fc71cff4ca627edb91",
+        "android_client_info": {
+          "package_name": "com.example.tawsel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRqc6X92Z36U77CYgSchnxL8-7ZqkMHoA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

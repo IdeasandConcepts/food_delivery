@@ -1,0 +1,203 @@
+
+import 'dart:io';
+
+import 'package:circle_nav_bar/circle_nav_bar.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:food_delivery/favorite/favorite_screen.dart';
+import 'package:get/get.dart';
+import 'package:food_delivery/chart/myCart.dart';
+import 'package:food_delivery/const.dart';
+import 'package:food_delivery/home/details.dart';
+import 'package:food_delivery/home/home_page.dart';
+import 'package:food_delivery/profile/myProfile.dart';
+import 'package:food_delivery/profile/myprofile_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+
+
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMixin {
+  @override
+  int _tabIndex = 0;
+
+  int get tabIndex => _tabIndex;
+
+  set tabIndex(int v) {
+    _tabIndex = v;
+    setState(() {});
+  }
+
+
+  // final Rxn<int> selected = Rxn<int>();
+  late PageController pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = PageController(initialPage: _tabIndex);
+  }
+
+  //final controller=Get.put(NavigationBarController());
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white,
+      // appBar: AppBar(
+      //   backgroundColor: Colors.white,
+      //   shadowColor: Colors.transparent,
+      //   title: Row(
+      //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      //     children: [
+      //       Padding(
+      //         padding: const EdgeInsets.only(top:10),
+      //         child: Icon(
+      //           Icons.menu,
+      //           color: Colors.black,
+      //           size: 25,
+      //             //fontFamily: PdfGoogleFonts.alefBold(),
+      //         ),
+      //       ),
+      //       // SizedBox(
+      //       //     width:5
+      //       // ),
+      //
+      //
+      //       ClipOval(
+      //         clipBehavior: Clip.hardEdge,
+      //         child: Material(
+      //           //color: Colors.transparent,
+      //           // child: Image.network(
+      //           //imageAssets,
+      //           // File
+      //           //   File(),
+      //           //  width:70,
+      //           //double.maxFinite-400,
+      //           //  height: 50,
+      //           //  width: 50,
+      //           // fit: BoxFit.cover,
+      //           child: Ink.image(
+      //             image: AssetImage(
+      //               "assets/images/women.png"),
+      //               fit: BoxFit.cover,
+      //             height: 40,
+      //             width: 40,
+      //             // ),
+      //           ),
+      //         ),
+      //       )
+      //     ],
+      //   ),
+      //   centerTitle: true,
+      // ),
+      body: PageView(
+        controller: pageController,
+        onPageChanged: (v) {
+          tabIndex = v;
+        },
+        children: [
+          HomePage(),
+          FavoriteScreen(),
+          // Container(width: double.infinity,
+          //     height: double.infinity,
+          //     color: Colors.green),
+          //Container(width: double.infinity, height: double.infinity, color: Colors.red),
+          MyCartScreen(),
+      //     InkWell(
+      //       child:
+      //       Container(width: double.infinity, height: double.infinity, color: Colors.green),
+      // onTap: (){
+      //   openWhatsapp(context: context);
+      //       }
+      //     ),
+
+          profile()
+          //Container(width: double.infinity, height: double.infinity, color: Colors.blue),
+        ],
+      ),
+      bottomNavigationBar:
+      CircleNavBar(
+        circleColor: Colors.white,
+        //circleShadowColor: kprimaryColor,
+        activeIcons:  [
+          Icon(Icons.home, color: kprimaryColor,),
+
+          Icon(Icons.favorite, color: kprimaryColor,),
+          Icon(Icons.shopping_cart, color: kprimaryColor,),
+          //Icon(Icons.comment, color: kprimaryColor),
+          Icon(Icons.person, color: kprimaryColor,),
+        ],
+        inactiveIcons: const [
+          Icon(Icons.home, color: kprimaryColor,),
+
+          Icon(Icons.favorite, color: kprimaryColor,),
+          Icon(Icons.shopping_cart, color: kprimaryColor,),
+         // Icon(Icons.comment, color: kprimaryColor),
+          Icon(Icons.person, color: kprimaryColor,),
+
+        ],
+        color: Colors.black,
+        circleShadowColor: kprimaryColor,
+        height: 60,
+        circleWidth: 60,
+        activeIndex: tabIndex,
+        onTap: (index) {
+          tabIndex = index;
+          pageController.jumpToPage(tabIndex);
+        },
+        padding: const EdgeInsets.only(top: 5),
+
+        // cornerRadius: const BorderRadius.only(
+        //   topLeft: Radius.circular(25),
+        //   topRight: Radius.circular(25),
+        //   // bottomRight: Radius.circular(24),
+        //   // bottomLeft: Radius.circular(24),
+        // ),
+        shadowColor: Colors.white,
+        elevation: 10,
+      ),
+      // CurvedNavigationBar(
+      //   backgroundColor: Colors.black,
+      //    items: [
+      //     Icon(Icons.home,color: kprimaryColor,),
+      //
+      //      Icon(Icons.favorite,color: kprimaryColor,),
+      //      Icon(Icons.shopping_cart,color: kprimaryColor,),
+      //
+      //      SvgPicture.asset("assets/icons/Mail.svg",
+      //           ),
+      //      //Icon(Icons.w),
+      //      Icon(Icons.person,color: kprimaryColor,),
+      //   ],
+      // )
+
+
+    );
+  }
+
+   openWhatsapp({required BuildContext context}) async {
+    String whatsapp = '+92****';
+    String whatsappURlAndroid = "whatsapp://send?phone=$whatsapp&text=hello";
+    String whatsappURLIos =
+        "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    if (Platform.isIOS) {
+      if (await canLaunchUrl(Uri.parse(whatsappURLIos))) {
+        await launchUrl(Uri.parse(whatsappURLIos));
+      } else {
+        //  _showToast(text: "whatsapp no installed");
+      }
+    } else {
+      if (await canLaunchUrl(Uri.parse(whatsappURlAndroid))) {
+        await launchUrl(Uri.parse(whatsappURlAndroid));
+      } else {
+        // _showToast(text: "whatsapp no installed");
+      }
+    }
+  }
+}
