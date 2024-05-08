@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery/profile/setting_screen.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:food_delivery/controller/Controller.dart';
@@ -19,8 +20,8 @@ class MyProfile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Controller c = Get.put(Controller());
-    // List profileNavigator=[MyOrders(),OrderDetails(),OrderDetails(),
-    //   OrderDetails(),OrderDetails(),Setting()];
+    List profileNavigator=[MyOrders(),MyOrders(),MyOrders(),
+      Setting(),Setting(),Setting()];
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -37,7 +38,8 @@ class MyProfile extends StatelessWidget {
             Align(
               alignment: Alignment.centerLeft,
               child: Text(TText.onBoardingTitle1,
-                        style: TTextTheme.lightTextThem.headlineLarge),
+                        style: context.theme.textTheme.headlineLarge//TTextTheme.lightTextThem.headlineLarge
+              ),
             ),
             SizedBox(height: TSizes.spaceBtwItems),
             Container(
@@ -48,15 +50,16 @@ class MyProfile extends StatelessWidget {
                 children: [
                   CircleAvatar(
                     radius: 40.sp,
-                    backgroundImage: Image.asset("assets/im/tshirt.jpg",fit: BoxFit.cover,).image,
+                    backgroundImage: Image.asset("assets/images/profile.png",fit: BoxFit.cover,).image,
 
                   ),
                   Expanded(
                     child: ListTile(
                       title: Text("Mohammed",
-                      style: TTextTheme.lightTextThem.headlineMedium,) ,
+                      style:context.theme.textTheme.headlineLarge,) ,
                       subtitle: Text("Mohammed@gmail.com",
-                        style: TTextTheme.lightTextThem.labelMedium,) ,
+                        style: context.theme.textTheme.labelMedium// TTextTheme.lightTextThem.labelMedium,
+                      ) ,
                     ),
                   )
                 ],
@@ -73,12 +76,14 @@ class MyProfile extends StatelessWidget {
                       width: MediaQuery.sizeOf(context).width,
                       child: ListTile(
                         onTap: (){
-                       // Get.to(profileNavigator[index]);
+                        Get.to(profileNavigator[index]);
                         },
                         title: Text(c.profiLelable[index],
-                          style: TTextTheme.lightTextThem.headlineSmall,) ,
+                          style:  context.theme.textTheme.headlineSmall//TTextTheme.lightTextThem.headlineSmall,
+                        ) ,
                         subtitle: Text(c.profiLeSublable[index],
-                          style: TTextTheme.lightTextThem.labelMedium,) ,
+                          style:  context.theme.textTheme.labelMedium//TTextTheme.lightTextThem.labelMedium,
+                        ) ,
                         trailing: Icon(Icons.arrow_forward_ios),
                       ),
                     );

@@ -1,7 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery/profile/myprofile_screen.dart';
 import 'package:food_delivery/test.dart';
+import 'package:food_delivery/themes/themes.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/auth/login.dart';
 import 'package:food_delivery/const.dart';
@@ -32,29 +35,35 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-
+  return  ScreenUtilInit(
+        designSize: const Size(360, 690),
+    minTextAdapt: true,
+    splitScreenMode: true,
+    builder: (_, child) {
     return GetMaterialApp(
         navigatorKey: navigatorKey,
         debugShowCheckedModeBanner: false,
         defaultGlobalState: true,
         title: 'Food',
-        theme: ThemeData(
+        darkTheme: TAppTheme.darkTheme,
+        themeMode: ThemeMode.system,
+        theme: TAppTheme.lightTheme,
+        //ThemeData(
           // data: Theme.of(context).copyWith (
-          splashColor: Colors.transparent,
-          highlightColor: Colors.transparent,
-          hoverColor: Colors.transparent,
-          primaryColor: kprimaryColor,
-        ),
+       //   splashColor: Colors.transparent,
+        //  highlightColor: Colors.transparent,
+        //  hoverColor: Colors.transparent,
+        //  primaryColor: kprimaryColor,),
         locale: Get.deviceLocale,
-      home:
+      home:MyProfile()
       //TabBarTest()
-      AndroidAuthPage()
+   //   AndroidAuthPage()
      // Process()
       //SizesTest()
      // AndroidAuthPage()
       //CardStack()
       //HomeScreen()
-    );
+    );});
   }
 }
 

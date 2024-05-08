@@ -18,6 +18,9 @@ class NavigationBarCont extends GetxController {
 
 
 class Controller extends GetxController  {
+  //initialize current theme
+  Rx<ThemeMode> currentTheme = ThemeMode.system.obs;
+
   List profiLelable = [
     "My Order",
     "Shipping addresses",

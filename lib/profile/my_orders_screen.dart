@@ -20,10 +20,12 @@ import 'package:intl/intl.dart';
 
 class MyOrders extends StatelessWidget {
    MyOrders({super.key});
-  //final  MyTabController  tabController = Get.put(MyTabController());
+   final  MyTabController  tabController = Get.put(MyTabController());
+  late BuildContext Zcontext;
   @override
   Widget build(BuildContext context) {
  double width = MediaQuery.sizeOf(context).width;
+ Zcontext =context;
 
     return SafeArea(
       child: Scaffold(
@@ -48,66 +50,18 @@ class MyOrders extends StatelessWidget {
               //   child: Text(TText.onBoardingTitle1,
               //       style: TTextTheme.lightTextThem.headlineLarge),
               // ),
-               SizedBox(height: TSizes.spaceBtwItems,),
+               SizedBox(height: TSizes.spaceBtwSection,),
               SizedBox(
                 height: 50,
-                child: ListView(
-                  scrollDirection: Axis.horizontal,
-                  children: [
-                    InkWell(
-                      onTap: (){
-                        //animatedto(0);
-                        },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child:
-                        Container(
-                          height: 50,
-                          width: width/3.5,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(TSizes.buttonRadius),
-                          color: TColors.darkerGrey,
-                        )  ,
-                         child: Center(child: Text( 'Delivered',
-                         style: TextStyle(color: TColors.white) ),))
-                      ),
-                    ),
-      //  ])
-
-                    InkWell(
-                      onTap: (){ animatedto(1);},
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:
-                              Container(
-                                  height: 50,
-                                  width: width/3.5,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(TSizes.buttonRadius),
-                                    color: TColors.darkerGrey,
-                                  )  ,
-                                  child: Center(child: Text( 'Processing',
-                                    style:
-                                    TextStyle(color: TColors.white) )),)
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){ animatedto(2);},
-                      child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child:
-                              Container(
-                                  height: 50,
-                                  width: width/3.5,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(TSizes.buttonRadius),
-                                    color: TColors.darkerGrey,
-                                  ) ,
-                                  child: Center(child: Text( 'Cancelled',
-                                    style: TextStyle(color: TColors.white))),)
-                      ),
-                    ),
-                  ],
+                child:
+                TabBar(
+                  tabs: tabController.mytab,
+                  controller: tabController.controller,
+                  indicator: BoxDecoration(
+                    borderRadius: BorderRadius.circular(TSizes.buttonRadius),
+                    color: TColors.darkGrey,),
+                  indicatorPadding: EdgeInsets.only(bottom: 5),
+                  labelStyle: TextStyle(fontSize: 14.sp,color: TColors.white),
                 ),
         ),
             //  SizedBox(height: TSizes.spaceBtwSection,),
@@ -204,6 +158,7 @@ class MyOrders extends StatelessWidget {
                           );
                         }
                       }),
+
                 ),
                 // child: ListView.builder(
                 //     itemCount: userOrderList.length,
@@ -255,8 +210,8 @@ Get.to(()=>OrderDetails(
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text( "Order N0"+"\t"+'${userOrdersList.orderNumber}',style: TTextTheme.lightTextThem.bodyLarge,),
-                    Text('${userOrdersList.order.uDate}',style: TTextTheme.lightTextThem.bodySmall,),
+                    Text( "Order N0"+"\t"+'${userOrdersList.orderNumber}',style:  Zcontext.theme.textTheme.bodyLarge),
+                    Text('${userOrdersList.order.uDate}',style:  Zcontext.theme.textTheme.bodySmall,),
                   ],
                 ),
                 SizedBox(height: TSizes.spaceBtwItems,),
@@ -265,10 +220,10 @@ Get.to(()=>OrderDetails(
                   child: RichText(
                       text: TextSpan(
                           text: " Tracking number:"+"\t",
-                          style: TTextTheme.lightTextThem.bodySmall,
+                          style:  Zcontext.theme.textTheme.bodySmall,
                           children: [
                             TextSpan(text:userOrdersList.trackingNumber,
-                                style: TTextTheme.lightTextThem.bodyLarge)
+                                style: Zcontext.theme.textTheme.bodyLarge)
                           ]
                       )),
                 ),
@@ -279,19 +234,19 @@ Get.to(()=>OrderDetails(
                     RichText(
                         text: TextSpan(
                             text: "quantity:"+"\t",
-                            style: TTextTheme.lightTextThem.bodySmall,
+                            style:  Zcontext.theme.textTheme.bodySmall,
                             children: [
                               TextSpan(text:"${userOrdersList.order.requests.length}" ,
-                                  style: TTextTheme.lightTextThem.bodyLarge)
+                                  style: Zcontext.theme.textTheme.bodyLarge)
                             ]
                         )),
                     RichText(
                         text: TextSpan(
                             text: "Total Amount:",
-                            style: TTextTheme.lightTextThem.bodySmall,
+                            style:  Zcontext.theme.textTheme.bodySmall,
                             children: [
                               TextSpan(text:"${userOrdersList.order.requests[0]}"+"\t"+"\$" ,
-                                  style: TTextTheme.lightTextThem.bodyLarge)
+                                  style:  Zcontext.theme.textTheme.bodyLarge)
                             ]
                         )),
 
@@ -303,8 +258,8 @@ Get.to(()=>OrderDetails(
                   children: [
                     OutlinedButton(
                       onPressed: (){},
-                      child: Text("Details",style: TTextTheme.lightTextThem.labelLarge,),
-                      style: TOutLineButtonTheme.lightOutlinebuttonTheme.style,),
+                      child: Text("Details",style:  Zcontext.theme.textTheme.bodyLarge,),
+                      style:  Zcontext.theme.outlinedButtonTheme.style,),
                     Text(userOrdersList.status,style: TextStyle(color: TColors.success),)
                   ],
                 ),
@@ -317,14 +272,6 @@ Get.to(()=>OrderDetails(
 
       ),
     );
-  }
-
-  void animatedto(int i) {
-
-    // //tabController.currentIndex= i.obs;
-    // //tabController.pageController.animateToPage(tabController.currentIndex.value,
-    //     duration: Duration(milliseconds: 300),
-    //     curve: Curves.ease);
   }
 
 

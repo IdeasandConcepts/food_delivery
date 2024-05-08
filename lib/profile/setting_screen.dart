@@ -42,17 +42,13 @@ class Setting extends StatelessWidget {
                   children: [
                     IconButton(onPressed: () {},
                       icon: Icon(Icons.arrow_back_ios_new),
-                      color: TAppBarTheme.lightAppBarTheme.actionsIconTheme
-                          ?.color,
-                      iconSize: TAppBarTheme.lightAppBarTheme.actionsIconTheme
-                          ?.size,
+                      color: context.theme.appBarTheme.actionsIconTheme?.color,// TAppBarTheme.lightAppBarTheme.actionsIconTheme?.color,
+                      iconSize:  context.theme.appBarTheme.actionsIconTheme?.size,
                     ),
                     IconButton(onPressed: () {},
                       icon: Icon(Icons.search),
-                      color: TAppBarTheme.lightAppBarTheme.actionsIconTheme
-                          ?.color,
-                      iconSize: TAppBarTheme.lightAppBarTheme.actionsIconTheme
-                          ?.size,
+                      color: context.theme.appBarTheme.actionsIconTheme?.color,// TAppBarTheme.lightAppBarTheme.actionsIconTheme?.color,
+                      iconSize:  context.theme.appBarTheme.actionsIconTheme?.size,
                     )
                   ],
                 ),
@@ -60,13 +56,13 @@ class Setting extends StatelessWidget {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Settings",
-                    style: TTextTheme.lightTextThem.headlineLarge,),
+                    style: context.theme.textTheme.headlineLarge,),
                 ),
                 SizedBox(height: TSizes.spaceBtwItems,),
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Text("Personal Information",
-                    style: TTextTheme.lightTextThem.titleLarge,),
+                    style: context.theme.textTheme.titleLarge),
                 ),
                 SizedBox(height: TSizes.spaceBtwItems,),
                 CustomTextFormField(
@@ -81,14 +77,14 @@ class Setting extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text("Password",
-                        style: TTextTheme.lightTextThem.titleLarge,),
+                        style: context.theme.textTheme.titleLarge),
                     ),
                     InkWell(
                       onTap: () {
-                        return getBottomSheetPassword(width);
+                        return getBottomSheetPassword(width,context);
                       },
                       child: Text("Change",
-                        style: TTextTheme.lightTextThem.bodySmall,),
+                        style:context.theme.textTheme.bodySmall),
                     ),
                   ],
                 ),
@@ -112,7 +108,7 @@ class Setting extends StatelessWidget {
     );
   }
 
-  getBottomSheetPassword(double width) {
+  getBottomSheetPassword(double width,BuildContext context) {
     return Get.bottomSheet(
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -122,7 +118,7 @@ class Setting extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 Text("Chang Password",
-                    style:TTextTheme.lightTextThem.titleLarge),
+                    style:context.theme.textTheme.titleLarge),
                 SizedBox(height: TSizes.spaceBtwItems,),
                 CustomTextFormField(keyBoard: TextInputType.visiblePassword,
                   hint: "OLd Password",),
@@ -144,10 +140,10 @@ class Setting extends StatelessWidget {
                     onPressed: () {
                       Get.back();
                     },
-                    style: TElevatedButtonTheme.lightElevatedButtonTheme.style,
+                    style: context.theme.elevatedButtonTheme.style,//TElevatedButtonTheme.lightElevatedButtonTheme.style,
                     child: Text(
                       "SAVE PASSWORD",
-                      style: TTextTheme.darkTextThem.bodyLarge,
+                      style: context.theme.textTheme.bodyLarge,
                     ),
                   ),
                 ),
@@ -160,7 +156,7 @@ class Setting extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.only(
             topRight:Radius.circular( TSizes.buttonRadius),
             topLeft:Radius.circular( TSizes.buttonRadius) )),
-      backgroundColor: TColors.primaryBackground
+     // backgroundColor: cot
 
 
     );

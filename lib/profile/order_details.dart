@@ -39,8 +39,7 @@ import 'package:food_delivery/widgets/text_string.dart';
 class OrderDetails extends StatelessWidget {
  final UserOrdersList userOrdersList;
 
-  const OrderDetails({super.key,
-    required this.userOrdersList
+  const OrderDetails({super.key, required this.userOrdersList
   });
 
   @override
