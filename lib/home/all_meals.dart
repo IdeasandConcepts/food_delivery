@@ -1,6 +1,9 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:food_delivery/model/products.dart';
+import 'package:food_delivery/model/users.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/const.dart';
 import 'package:food_delivery/home/details.dart';
@@ -9,11 +12,16 @@ import 'package:food_delivery/model/model.dart';
 
 
 class HomeDetails extends StatefulWidget {
- final List<Map<String, dynamic>>  products;
+ final String  productsCategory;
+ //final int phoneNumber;
+ final String user ;
+ final String profileImage;
 
   const HomeDetails(
       {super.key,
-        required this.products
+        required this.productsCategory,
+        required this.user,
+        required this.profileImage,
 
       });
 
@@ -27,63 +35,82 @@ class _HomeDetailsState extends State<HomeDetails> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
+
+
      // flex: 3,
-      child: GridView.count(
-        crossAxisCount: 2,
-        childAspectRatio: 0.99,
-        crossAxisSpacing: 12.5,
-        mainAxisSpacing: 12.5,
-       shrinkWrap: true,
-       // padding: EdgeInsets.only(left:15.0,right: 15.0),
-        children:
-          List.generate(
-            widget.products.length, (index) {
-            return
-                      //     ListView.builder(
-                      //       itemCount: 4,
-                      // itemBuilder: (context,index) {
-                      //   return
-                      buildDailyTask
-                        (
-
-                        widget.products[index]["description"],
-
-                        widget.products[index]["image"],
-                          widget.products[index]["title"],
-
-                        widget.products[index]["is_favorite"],
-
-                        widget.products[index]["price"],
-                         widget.products[index]["old_price"],);
-                  },
-         
-      )
+      child:
+        StreamBuilder<List<Products>>(
+            stream: readCategoryProducts(widget.productsCategory),
+            builder: (context, snapshot) {
+              if (snapshot.hasError) {
+                return Text(' Error ya Ahmed :: ${snapshot.error}');
+              } else if (snapshot.hasData) {
+                final product = snapshot.data!;
+                return  GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 0.99,
+                    crossAxisSpacing: 12.5,
+                    mainAxisSpacing: 12.5,
+                    // shrinkWrap: true,
+                    // padding: EdgeInsets.only(left:15.0,right: 15.0),
+                  ),
+                    itemCount: product!.length,
+                    itemBuilder: ((context,index){
+                      return
 
 
-       // ]
-    )
+                    // childAspectRatio: 0.99,
+                    // crossAxisSpacing: 12.5,
+                    // mainAxisSpacing: 12.5,
+                    // shrinkWrap: true,
+                    // padding: EdgeInsets.only(left:15.0,right: 15.0),
+                   // children:
+                   // List.generate(product!.length, (index) =>
+                 // // controller: _scrollController,
+                 //  children:
+                  //product.map
+                    buildDailyTask(product![index]);
+                        //.toList(),
+                  //product.map(_buildFoodItem.toList(),
+                 // shrinkWrap: true,
+                  })
+                 // ]
+                  );
+              } else {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            }),
+    //)
+
+    //
+    //     ]
+    // )
     );
   }
 
   Widget buildDailyTask(
-      String description,
-
-      String imageSrc,
-      String mealTitle,
-      bool isFavorite,
-      double price,
-      double prefPrice) => GestureDetector(
+      Products product) => GestureDetector(
     onTap: (){
       Get.to(()=>DetailsScreen(
-        image: imageSrc,
-        productName: mealTitle,
-        productPrice: price,
-        isFavorite: isFavorite,
-        productCategory: mealTitle,
-        productDetails: description,
+        profileImage: widget.profileImage,
+        selectedComponent: "",
+        productSize: "M",
+        //phone: widget.phoneNumber,
+        product: product,
+        user: widget.user,
+        // image: imageSrc,
+        // productName: mealTitle,
+        // productPrice: price,
+        // isFavorite: isFavorite,
+        // productCategory: mealTitle,
+        // productDetails: description,
       ));
     },
         child: Container(
+          // padding: EdgeInsets.only(left:15.0,right: 15.0),
     decoration: BoxDecoration(
           color: Colors.black,
           borderRadius: BorderRadius.circular(15),
@@ -123,7 +150,7 @@ class _HomeDetailsState extends State<HomeDetails> {
                     borderRadius: BorderRadius.circular(25)),
                 child: Image.asset(
 
-                  imageSrc,
+                  product.imageSrc,
                   fit:BoxFit.contain,
                  // width: d,
                   //color: Colors.white,
@@ -142,7 +169,7 @@ class _HomeDetailsState extends State<HomeDetails> {
                 children: [
                   Container(
                     //margin: EdgeInsets.all(8),
-                    child: Text(mealTitle,
+                    child: Text(product.title,
                       style: TextStyle(fontSize: 12,color: Colors.white),
                     ),
                   ),
@@ -156,7 +183,7 @@ class _HomeDetailsState extends State<HomeDetails> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        (isFavorite==true) ?
+                        (product.isFavorite==true) ?
 
                         Row(
 
@@ -188,13 +215,13 @@ class _HomeDetailsState extends State<HomeDetails> {
                         ),
                         Container(
                           //margin: EdgeInsets.all(8),
-                          child: Text("${price}\$",
+                          child: Text("${product.price}\$",
                             style: TextStyle(fontSize: 12,color: Colors.white),
                           ),
                         ),
                         Container(
                           //margin: EdgeInsets.all(8),
-                          child: Text("${prefPrice}\$",
+                          child: Text("${product.oldPrice}\$",
                             style: TextStyle(fontSize: 12,color: Colors.white,
                             decoration: TextDecoration.lineThrough,
                               decorationThickness: 3,
@@ -214,6 +241,16 @@ class _HomeDetailsState extends State<HomeDetails> {
           ]),
   ),
       );
+
+  Stream<List<Products>> readCategoryProducts(String category) =>
+      FirebaseFirestore.instance
+          .collection('All Products')
+         // .where('category', isEqualTo: category,)
+
+          .snapshots()
+          .map((snapshot) =>
+          snapshot.docs.map((doc) => Products.fromMap(doc.data()))
+              .toList());
 
 
 }

@@ -12,6 +12,32 @@ class AuthHelper {
     final User user = res.user!;
     return user;
   }
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  User? get currentUser => _firebaseAuth.currentUser;
+
+  Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
+
+  // Future<void> signInWithEmailAndPassword({
+  //   required String email,
+  //   required String password,
+  // }) async{
+  //   await _firebaseAuth.signInWithEmailAndPassword(
+  //     email: email,
+  //     password: password,
+  //   );
+  //
+  // }
+
+  //
+  // Future<void> createUserWithEmailAndPassword({
+  //   required String email,
+  //   required String password,
+  // }) async{
+  //   await _firebaseAuth.createUserWithEmailAndPassword(
+  //     email: email,
+  //     password: password,
+  //   );
+  // }
 
   // static signWithgogole() async {
   //   GoogleSignIn googleSignIn = GoogleSignIn();
@@ -23,7 +49,7 @@ class AuthHelper {
 
   static logOut() {
     //GoogleSignIn().signOut();
-    return _auth.signOut();
+    return FirebaseAuth.instance.signOut();
   }
 }
 //

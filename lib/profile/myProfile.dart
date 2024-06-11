@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/model/users.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/profile/my_orders_screen.dart';
 import 'package:food_delivery/profile/setting_screen.dart';
 
 
 class profile extends StatefulWidget {
-  const profile({super.key});
+  final String user ;
+  final String profileImage;
+  const profile({super.key, required this.user, required this.profileImage, });
 
   @override
   State<profile> createState() => _profileState();
@@ -85,7 +88,12 @@ class _profileState extends State<profile> {
 
           InkWell(
             onTap: (){
-              Get.to(()=>MyOrders());
+              Get.to(()=>MyOrders(
+                profileImage: widget.profileImage,
+                user: widget.user,
+
+               // branch: widget.profileImage,
+              ));
             },
             child: Container(
              // width: 360,

@@ -2,15 +2,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:food_delivery/profile/myprofile_screen.dart';
-import 'package:food_delivery/test.dart';
-import 'package:food_delivery/themes/themes.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery/auth/login.dart';
 import 'package:food_delivery/const.dart';
-import 'package:food_delivery/home/home.dart';
-import 'package:food_delivery/profile/order_tracking.dart';
-import 'package:food_delivery/sizes.dart';
 import 'package:food_delivery/auth/auth_page.dart';
 
 
@@ -35,8 +28,8 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-  return  ScreenUtilInit(
-        designSize: const Size(360, 690),
+    return  ScreenUtilInit(
+        designSize:  Size(MediaQuery.of(context).size.width, MediaQuery.of(context).size.height,),
     minTextAdapt: true,
     splitScreenMode: true,
     builder: (_, child) {
@@ -45,19 +38,19 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         defaultGlobalState: true,
         title: 'Food',
-        darkTheme: TAppTheme.darkTheme,
-        themeMode: ThemeMode.system,
-        theme: TAppTheme.lightTheme,
-        //ThemeData(
+        theme: ThemeData(
           // data: Theme.of(context).copyWith (
-       //   splashColor: Colors.transparent,
-        //  highlightColor: Colors.transparent,
-        //  hoverColor: Colors.transparent,
-        //  primaryColor: kprimaryColor,),
+          splashColor: Colors.transparent,
+          highlightColor: Colors.transparent,
+          hoverColor: Colors.transparent,
+          primaryColor: kprimaryColor,
+        ),
         locale: Get.deviceLocale,
-      home:MyProfile()
+      home:AndroidAuthPage()
+      //WidgetTree()
+      //SignUpPage()
       //TabBarTest()
-   //   AndroidAuthPage()
+     // AndroidAuthPage()
      // Process()
       //SizesTest()
      // AndroidAuthPage()

@@ -6,6 +6,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/favorite/favorite_screen.dart';
+import 'package:food_delivery/widgets/drower.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/chart/myCart.dart';
 import 'package:food_delivery/const.dart';
@@ -15,15 +16,24 @@ import 'package:food_delivery/profile/myProfile.dart';
 import 'package:food_delivery/profile/myprofile_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../model/users.dart';
+
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+ final String user;
+  final String profileImage;
+  // final int phoneNumber;
+  const HomeScreen({Key? key,
+   required this.user,
+    required this.profileImage,
+    // required this.phoneNumber
+  }) : super(key: key);
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   int _tabIndex = 0;
 
@@ -36,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMi
 
 
   // final Rxn<int> selected = Rxn<int>();
-  late PageController pageController;
+  late PageController pageController=PageController();
 
   @override
   void initState() {
@@ -49,6 +59,7 @@ class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMi
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+
       // appBar: AppBar(
       //   backgroundColor: Colors.white,
       //   shadowColor: Colors.transparent,
@@ -102,13 +113,24 @@ class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMi
           tabIndex = v;
         },
         children: [
-          HomePage(),
-          FavoriteScreen(),
+          HomePage(
+          //  phoneNumber: widget.phoneNumber,
+           user: widget.user,
+           profileImage: widget.profileImage,
+          ),
+          FavoriteScreen(
+           user: widget.user
+          ),
           // Container(width: double.infinity,
           //     height: double.infinity,
           //     color: Colors.green),
           //Container(width: double.infinity, height: double.infinity, color: Colors.red),
-          MyCartScreen(),
+          MyCartScreen(
+profileImage: widget.profileImage,
+            //phoneNumber: widget.phoneNumber,
+            user: widget.user,
+
+          ),
       //     InkWell(
       //       child:
       //       Container(width: double.infinity, height: double.infinity, color: Colors.green),
@@ -117,7 +139,11 @@ class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMi
       //       }
       //     ),
 
-          profile()
+          profile(
+            user: widget.user,
+
+            profileImage: widget.profileImage,
+          )
           //Container(width: double.infinity, height: double.infinity, color: Colors.blue),
         ],
       ),
@@ -142,10 +168,12 @@ class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMi
           Icon(Icons.person, color: kprimaryColor,),
 
         ],
+
         color: Colors.black,
         circleShadowColor: kprimaryColor,
         height: 60,
         circleWidth: 60,
+
         activeIndex: tabIndex,
         onTap: (index) {
           tabIndex = index;
@@ -153,29 +181,9 @@ class _HomeScreenState extends State<HomeScreen>with SingleTickerProviderStateMi
         },
         padding: const EdgeInsets.only(top: 5),
 
-        // cornerRadius: const BorderRadius.only(
-        //   topLeft: Radius.circular(25),
-        //   topRight: Radius.circular(25),
-        //   // bottomRight: Radius.circular(24),
-        //   // bottomLeft: Radius.circular(24),
-        // ),
         shadowColor: Colors.white,
         elevation: 10,
       ),
-      // CurvedNavigationBar(
-      //   backgroundColor: Colors.black,
-      //    items: [
-      //     Icon(Icons.home,color: kprimaryColor,),
-      //
-      //      Icon(Icons.favorite,color: kprimaryColor,),
-      //      Icon(Icons.shopping_cart,color: kprimaryColor,),
-      //
-      //      SvgPicture.asset("assets/icons/Mail.svg",
-      //           ),
-      //      //Icon(Icons.w),
-      //      Icon(Icons.person,color: kprimaryColor,),
-      //   ],
-      // )
 
 
     );

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/auth/auth_page.dart';
 import 'package:food_delivery/const.dart';
 import 'package:food_delivery/home/home.dart';
 import 'package:food_delivery/main.dart';
+import 'package:get/get.dart';
 
 import 'login.dart';
 
@@ -132,8 +134,7 @@ class _ForgetPageState extends State<ForgetPage> {
                 ),
                 child: TextButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(
-                  builder:(context)=> HomeScreen()));
+                  Get.to(()=>AndroidAuthPage());
                 }, 
                 child: Text("Login", style:  TextStyle(fontSize: 26,fontWeight: FontWeight.w700, color: Color.fromRGBO(255, 255, 255, 1))),)
 

@@ -14,6 +14,7 @@
 
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery/model/orders.dart';
  import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -37,9 +38,10 @@ import 'package:food_delivery/widgets/text_string.dart';
 
 
 class OrderDetails extends StatelessWidget {
- final UserOrdersList userOrdersList;
+ final Orders userOrdersList;
 
-  const OrderDetails({super.key, required this.userOrdersList
+  const OrderDetails({super.key,
+    required this.userOrdersList
   });
 
   @override
@@ -53,7 +55,7 @@ class OrderDetails extends StatelessWidget {
       //appBar: c.obs("Order Details"),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding:  EdgeInsets.all(8.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
@@ -66,44 +68,52 @@ class OrderDetails extends StatelessWidget {
                   Text(
 
 
-                    userOrdersList.order.uDate.toString(),style: TTextTheme.lightTextThem.bodySmall,),
+                    userOrdersList.uDate.toString(),style: TTextTheme.lightTextThem.bodySmall,),
                 ],
               ),
-              SizedBox(height: TSizes.spaceBtwItems,),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  RichText(
-                      text: TextSpan(
-                        text: "Tracking number"+":"+"\t",
-                          style: TTextTheme.lightTextThem.bodySmall,
-                        children: [
-                          TextSpan(text:userOrdersList.trackingNumber ,
-                          style: TTextTheme.lightTextThem.bodyLarge)
-                        ]
-                      )),
-                  Text( TText.onBoardingTitle1,
-                    style:TextStyle(color: TColors.success),),
-
-                ],
-              ),
+              // SizedBox(height: TSizes.spaceBtwItems,),
+              // Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     RichText(
+              //         text: TextSpan(
+              //           text: "Tracking number"+":"+"\t",
+              //             style: TTextTheme.lightTextThem.bodySmall,
+              //           children: [
+              //             TextSpan(text:userOrdersList.trackingNumber ,
+              //             style: TTextTheme.lightTextThem.bodyLarge)
+              //           ]
+              //         )),
+              //     Text( TText.onBoardingTitle1,
+              //       style:TextStyle(color: TColors.success),),
+              //
+              //   ],
+              // ),
               SizedBox(height: TSizes.spaceBtwItems,),
               Padding(
                 padding: EdgeInsets.only(left: 15,right: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text( "${userOrdersList.order.requests.length}"+"\t"+"items",
+                      Text( "${userOrdersList.requests.length}"+"\t"+"items",
                         style: TTextTheme.lightTextThem.bodyLarge,),
                       Text( userOrdersList.status,
                         style: TTextTheme.lightTextThem.bodyLarge,),
 
                     ],
                   )),
-             // SizedBox(height: TSizes.spaceBtwItems,),
-
-              getCartList(400,340),
-            //
+              SizedBox(height: TSizes.spaceBtwItems,),
+         Container(
+           height: 200,
+           child:
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount:userOrdersList.requests.length,
+              itemBuilder: (context,index) =>
+                  getCartList(userOrdersList.requests[index])),
+          // List.generate(userOrdersList.requests.length, (index) =>
+          //     getCartList(400,340,userOrdersList),
+             ),
 
             //  c.getCartList(height,width),
                SizedBox(height: TSizes.spaceBtwItems,),
@@ -125,7 +135,7 @@ class OrderDetails extends StatelessWidget {
                     Expanded(
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
-                        child: Text(userOrdersList.order.uAddress,
+                        child: Text("userOrdersList.user.address",
                             style: TTextTheme.lightTextThem.bodyMedium,
                             maxLines: 2,
                         ),
@@ -144,7 +154,7 @@ class OrderDetails extends StatelessWidget {
                     child: Text("Payment Method:",
                       style: TTextTheme.lightTextThem.bodySmall,),
                   ),
-                  Image.asset("assets/im/paypall.png",
+                  Image.asset("assets/images/mastercard.png",
                     height: TSizes.iconMd,
                     width: TSizes.iconMd,),
                   Text( " **** **** **** 3457",
@@ -158,7 +168,7 @@ class OrderDetails extends StatelessWidget {
                     style: TTextTheme.lightTextThem.bodySmall,),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child: Text( userOrdersList.order.deliveryMethod,
+                    child: Text( userOrdersList.deliveryMethod,
                         style: TTextTheme.lightTextThem.bodyMedium
                     ),
                   )],),
@@ -182,7 +192,7 @@ class OrderDetails extends StatelessWidget {
                     style: TTextTheme.lightTextThem.bodySmall,),
                   Padding(
                     padding: const EdgeInsets.all(14.0),
-                    child: Text("${userOrdersList.order.uTotalPrice}"+"\$",
+                    child: Text("${userOrdersList.uTotalPrice}"+"\$",
                         style: TTextTheme.lightTextThem.bodyMedium
                     ),
                   )],),
@@ -205,7 +215,7 @@ class OrderDetails extends StatelessWidget {
       ),
     );
   }
-  getCartList(double height,double width) {
+  getCartList(UserRequests userOrdersList ) {
     return Wrap(
       children: [
         Card(
@@ -215,9 +225,10 @@ class OrderDetails extends StatelessWidget {
               children: [
                 SizedBox(
                   width: 130,
-                  height: height / 8,
+                //  height: 30,
                   child: Image.asset(
-                    "assets/im/blouse.jpg",
+                    userOrdersList.pImageAssets,
+                   // "assets/im/blouse.jpg",
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -225,15 +236,16 @@ class OrderDetails extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
+                        // Align(
+                        //   alignment: Alignment.centerLeft,
+                        //   child: Text("Pullover",
+                        //       style: TTextTheme.lightTextThem.headlineMedium),
+                        // ),
                         Align(
                           alignment: Alignment.centerLeft,
-                          child: Text("Pullover",
-                              style: TTextTheme.lightTextThem.headlineMedium),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Mango",
+                          child: Text(userOrdersList.pTitle,
                               style: TTextTheme.lightTextThem.bodySmall),
                         ),
                         Row(
@@ -245,13 +257,16 @@ class OrderDetails extends StatelessWidget {
                                 textAlign: TextAlign.start,
                                 text: TextSpan(children: [
                                   TextSpan(
-                                      text: "Color: ",
+                                      text: "Component",
                                       style:
-                                      TTextTheme.lightTextThem.bodySmall),
+                                      TTextTheme.lightTextThem.bodySmall
+                                  ),
                                   TextSpan(
-                                      text: "Gray",
-                                      style:
-                                      TTextTheme.lightTextThem.bodyMedium),
+                                      text:userOrdersList.pComponent,
+                                      style:TextStyle(fontSize: 8,color: Colors.black)
+                                     // TTextTheme.lightTextThem.bodyMedium
+
+                                  ),
                                 ]),
                               ),
                             ),
@@ -262,11 +277,27 @@ class OrderDetails extends StatelessWidget {
                                     text: "Size: ",
                                     style: TTextTheme.lightTextThem.bodySmall),
                                 TextSpan(
-                                    text: "M",
+                                    text: userOrdersList.pSize,
                                     style: TTextTheme.lightTextThem.bodyMedium),
                               ]),
                             ),
                           ],
+                        ),
+                        RichText(
+                          //textAlign: TextAlign.start,
+                          text: TextSpan(children: [
+                            TextSpan(
+                                text: "Component",
+                                style:
+                                TTextTheme.lightTextThem.bodySmall
+                            ),
+                            TextSpan(
+                                text:userOrdersList.pComponent,
+                                style:TextStyle(fontSize: 8,color: Colors.black)
+                              // TTextTheme.lightTextThem.bodyMedium
+
+                            ),
+                          ]),
                         ),
                         Align(
                           alignment: Alignment.centerLeft,
@@ -277,16 +308,16 @@ class OrderDetails extends StatelessWidget {
                                 textAlign: TextAlign.start,
                                 text: TextSpan(children: [
                                   TextSpan(
-                                      text: "Units: ",
+                                      text: "Count"+":",
                                       style:
                                       TTextTheme.lightTextThem.bodySmall),
                                   TextSpan(
-                                      text: "1",
+                                      text: '${userOrdersList.pCount}',
                                       style:
                                       TTextTheme.lightTextThem.bodyMedium),
                                 ]),
                               ),
-                              Text("51\$")
+                              Text("${userOrdersList.pPrice}\$")
                             ],
                           ),
                         ),
@@ -298,186 +329,186 @@ class OrderDetails extends StatelessWidget {
             ),
           ),
         ),
-        Card(
-          color: TColors.white,
-          child: Expanded(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 130,
-                  height: height / 8,
-                  child: Image.asset(
-                    "assets/im/tshirt.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Pullover",
-                              style: TTextTheme.lightTextThem.headlineMedium),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Mango",
-                              style: TTextTheme.lightTextThem.bodySmall),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 12.0),
-                              child: RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: "Color: ",
-                                      style:
-                                      TTextTheme.lightTextThem.bodySmall),
-                                  TextSpan(
-                                      text: "Gray",
-                                      style:
-                                      TTextTheme.lightTextThem.bodyMedium),
-                                ]),
-                              ),
-                            ),
-                            RichText(
-                              textAlign: TextAlign.end,
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "Size: ",
-                                    style: TTextTheme.lightTextThem.bodySmall),
-                                TextSpan(
-                                    text: "M",
-                                    style: TTextTheme.lightTextThem.bodyMedium),
-                              ]),
-                            ),
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: "Units: ",
-                                      style:
-                                      TTextTheme.lightTextThem.bodySmall),
-                                  TextSpan(
-                                      text: "1",
-                                      style:
-                                      TTextTheme.lightTextThem.bodyMedium),
-                                ]),
-                              ),
-                              Text("51\$")
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        Card(
-          color: TColors.white,
-          child: Expanded(
-            child: Row(
-              children: [
-                SizedBox(
-                  width: 130,
-                  height: height / 8,
-                  child: Image.asset(
-                    "assets/im/blouse.jpg",
-                    fit: BoxFit.cover,
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Pullover",
-                              style: TTextTheme.lightTextThem.headlineMedium),
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Mango",
-                              style: TTextTheme.lightTextThem.bodySmall),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 12.0),
-                              child: RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: "Color: ",
-                                      style:
-                                      TTextTheme.lightTextThem.bodySmall),
-                                  TextSpan(
-                                      text: "Gray",
-                                      style:
-                                      TTextTheme.lightTextThem.bodyMedium),
-                                ]),
-                              ),
-                            ),
-                            RichText(
-                              textAlign: TextAlign.end,
-                              text: TextSpan(children: [
-                                TextSpan(
-                                    text: "Size: ",
-                                    style: TTextTheme.lightTextThem.bodySmall),
-                                TextSpan(
-                                    text: "M",
-                                    style: TTextTheme.lightTextThem.bodyMedium),
-                              ]),
-                            ),
-                          ],
-                        ),
-                        Align(
-                          alignment: Alignment.centerLeft,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              RichText(
-                                textAlign: TextAlign.start,
-                                text: TextSpan(children: [
-                                  TextSpan(
-                                      text: "Units: ",
-                                      style:
-                                      TTextTheme.lightTextThem.bodySmall),
-                                  TextSpan(
-                                      text: "1",
-                                      style:
-                                      TTextTheme.lightTextThem.bodyMedium),
-                                ]),
-                              ),
-                              Text("51\$")
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        // Card(
+        //   color: TColors.white,
+        //   child: Expanded(
+        //     child: Row(
+        //       children: [
+        //         SizedBox(
+        //           width: 130,
+        //           height: height / 8,
+        //           child: Image.asset(
+        //             "assets/im/tshirt.jpg",
+        //             fit: BoxFit.cover,
+        //           ),
+        //         ),
+        //         Expanded(
+        //           child: Padding(
+        //             padding: const EdgeInsets.all(8.0),
+        //             child: Column(
+        //               children: [
+        //                 Align(
+        //                   alignment: Alignment.centerLeft,
+        //                   child: Text("Pullover",
+        //                       style: TTextTheme.lightTextThem.headlineMedium),
+        //                 ),
+        //                 Align(
+        //                   alignment: Alignment.centerLeft,
+        //                   child: Text("Mango",
+        //                       style: TTextTheme.lightTextThem.bodySmall),
+        //                 ),
+        //                 Row(
+        //                   mainAxisAlignment: MainAxisAlignment.start,
+        //                   children: [
+        //                     Padding(
+        //                       padding: const EdgeInsets.only(right: 12.0),
+        //                       child: RichText(
+        //                         textAlign: TextAlign.start,
+        //                         text: TextSpan(children: [
+        //                           TextSpan(
+        //                               text: "Color: ",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodySmall),
+        //                           TextSpan(
+        //                               text: "Gray",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodyMedium),
+        //                         ]),
+        //                       ),
+        //                     ),
+        //                     RichText(
+        //                       textAlign: TextAlign.end,
+        //                       text: TextSpan(children: [
+        //                         TextSpan(
+        //                             text: "Size: ",
+        //                             style: TTextTheme.lightTextThem.bodySmall),
+        //                         TextSpan(
+        //                             text: "M",
+        //                             style: TTextTheme.lightTextThem.bodyMedium),
+        //                       ]),
+        //                     ),
+        //                   ],
+        //                 ),
+        //                 Align(
+        //                   alignment: Alignment.centerLeft,
+        //                   child: Row(
+        //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                     children: [
+        //                       RichText(
+        //                         textAlign: TextAlign.start,
+        //                         text: TextSpan(children: [
+        //                           TextSpan(
+        //                               text: "Units: ",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodySmall),
+        //                           TextSpan(
+        //                               text: "1",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodyMedium),
+        //                         ]),
+        //                       ),
+        //                       Text("51\$")
+        //                     ],
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
+        // Card(
+        //   color: TColors.white,
+        //   child: Expanded(
+        //     child: Row(
+        //       children: [
+        //         SizedBox(
+        //           width: 130,
+        //           height: height / 8,
+        //           child: Image.asset(
+        //             "assets/im/blouse.jpg",
+        //             fit: BoxFit.cover,
+        //           ),
+        //         ),
+        //         Expanded(
+        //           child: Padding(
+        //             padding: const EdgeInsets.all(8.0),
+        //             child: Column(
+        //               children: [
+        //                 Align(
+        //                   alignment: Alignment.centerLeft,
+        //                   child: Text("Pullover",
+        //                       style: TTextTheme.lightTextThem.headlineMedium),
+        //                 ),
+        //                 Align(
+        //                   alignment: Alignment.centerLeft,
+        //                   child: Text("Mango",
+        //                       style: TTextTheme.lightTextThem.bodySmall),
+        //                 ),
+        //                 Row(
+        //                   mainAxisAlignment: MainAxisAlignment.start,
+        //                   children: [
+        //                     Padding(
+        //                       padding: const EdgeInsets.only(right: 12.0),
+        //                       child: RichText(
+        //                         textAlign: TextAlign.start,
+        //                         text: TextSpan(children: [
+        //                           TextSpan(
+        //                               text: "Color: ",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodySmall),
+        //                           TextSpan(
+        //                               text: "Gray",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodyMedium),
+        //                         ]),
+        //                       ),
+        //                     ),
+        //                     RichText(
+        //                       textAlign: TextAlign.end,
+        //                       text: TextSpan(children: [
+        //                         TextSpan(
+        //                             text: "Size: ",
+        //                             style: TTextTheme.lightTextThem.bodySmall),
+        //                         TextSpan(
+        //                             text: "M",
+        //                             style: TTextTheme.lightTextThem.bodyMedium),
+        //                       ]),
+        //                     ),
+        //                   ],
+        //                 ),
+        //                 Align(
+        //                   alignment: Alignment.centerLeft,
+        //                   child: Row(
+        //                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        //                     children: [
+        //                       RichText(
+        //                         textAlign: TextAlign.start,
+        //                         text: TextSpan(children: [
+        //                           TextSpan(
+        //                               text: "Units: ",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodySmall),
+        //                           TextSpan(
+        //                               text: "1",
+        //                               style:
+        //                               TTextTheme.lightTextThem.bodyMedium),
+        //                         ]),
+        //                       ),
+        //                       Text("51\$")
+        //                     ],
+        //                   ),
+        //                 ),
+        //               ],
+        //             ),
+        //           ),
+        //         ),
+        //       ],
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }

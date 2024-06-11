@@ -21,54 +21,28 @@ class _ScrolledContainersState extends State<ScrolledContainers> {
   ];
   @override
   Widget build(BuildContext context) {
-    return  SingleChildScrollView(
+    return  Container(
+      height: 50,
+      width: double.maxFinite,
+      child: ListView.builder(
       scrollDirection: Axis.horizontal,
-      child: Container(
-        height: 50,
-        width: 280,
-        child: ListView.builder(
+        itemCount: categories.length,
+        shrinkWrap: true,
+        itemBuilder: (context,index){
+          return  FavContainer(
+            content: categories[index]
+          );
+        },
 
-          itemCount: categories.length,
-
-          itemBuilder: (context,index){
-            return  FavContainer(
-              content: categories[index]
-            );
-          },
-
-            // FavContainer(
-            //   content: 'Others',
-            // ),
-            // FavContainer(
-            //   content: 'Others',
-            // ),
+          // FavContainer(
+          //   content: 'Others',
+          // ),
+          // FavContainer(
+          //   content: 'Others',
+          // ),
 
 
-        ),
       ),
-      // child: Row(
-      //   children: [
-      //     FavContainer(
-      //       content: 'All',
-      //     ),
-      //     FavContainer(
-      //       content: 'Burgers',
-      //     ),
-      //     FavContainer(
-      //       content: 'Pizza',
-      //     ),
-      //     FavContainer(
-      //       content: 'Others',
-      //     ),
-      //     // FavContainer(
-      //     //   content: 'Others',
-      //     // ),
-      //     // FavContainer(
-      //     //   content: 'Others',
-      //     // ),
-      //
-      //   ],
-      // ),
     );
   }
 }

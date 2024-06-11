@@ -1,6 +1,14 @@
 import 'package:flutter/material.dart';
 
+   const Color mainColor = Color(0xffFFBE18);
 
+   const Color backgroundColor = Color(0xffffffff);
+   const Color backgroundCard = Color(0xffF1F1F1);
+   const Color fontColor1 = Color(0xff222222);
+   const Color fontColor2 = Color(0xFf000000);
+   const Color fontColor3 = Color(0xffEEEEEE);
+   const Color green = Color(0xff4BAA1E);
+   const Color red = Color(0xffF11515);
 const kprimaryColor = Color(0xFFFFBE18);
 //Color.fromARGB(2, 2, 92, 102);
 const kprimatyLightColor = Color(0xFFFFECDF);

@@ -1,12 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/model/users.dart';
 import 'package:get/get.dart';
-import 'package:food_delivery/chart/order_ast_review.dart';
+import 'package:food_delivery/chart/order_last_review.dart';
 import 'package:food_delivery/model/request.dart';
 import 'package:food_delivery/model/user_orders.dart';
 
 class CreditCardsPage extends StatefulWidget {
+  final double totalAmount;
   final List<UserRequests> userOrdersList;
-  const CreditCardsPage({super.key,required this.userOrdersList});
+  final String user ;
+  final String profileImage;
+  final String deliveryMethod;
+  const CreditCardsPage({
+    super.key,
+    required this.userOrdersList,
+    required this.user,
+    required this.deliveryMethod,
+    required this.totalAmount,
+    required this.profileImage
+  });
 
 
   @override
@@ -56,7 +68,13 @@ bool value=false;
             child: GestureDetector(
               onTap: (){
                 Get.to(()=>OrderLastReview(
+                  profileImage: widget.profileImage,
+                  totalAmount: widget.totalAmount,
+                  paymentMethod: "Credit Cart",
+                  //phoneNumber: widget.phoneNumber,
                   userOrdersList: widget.userOrdersList,
+                  user: widget.user,
+                  deliveryMethod: widget.deliveryMethod,
                 ));
                // OrderLastReview
               },
@@ -82,6 +100,12 @@ bool value=false;
             child:  GestureDetector(
               onTap: (){
                 Get.to(()=>OrderLastReview(
+                  profileImage: widget.profileImage,
+                  totalAmount: widget.totalAmount,
+                  paymentMethod: "Credit Cart",
+                  //phoneNumber: widget.phoneNumber,
+                  deliveryMethod: widget.deliveryMethod,
+                  user: widget.user,
                   userOrdersList: widget.userOrdersList,
                 ));
                 // OrderLastReview

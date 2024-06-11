@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:food_delivery/auth/login.dart';
 import 'package:food_delivery/auth/verification.dart';
 import 'package:food_delivery/const.dart';
+import 'package:get/get.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -9,6 +10,25 @@ class SignUpPage extends StatefulWidget {
   @override
   State<SignUpPage> createState() => _SignUpPageState();
 }
+String password="";
+String rating="";
+ int phoneNumber=0;
+ String name="";
+ String address="";
+ String promoCode="";
+ String email="";
+// "Ever wondered what's on a Big Mac®? The McDonald's Big Mac® is a 100% beef burger with a taste like no other.The mouthwatering perfection starts with two 100% pure",
+ String imageSrc='';
+
+ TextEditingController ratingController =TextEditingController(),
+ passWordController=TextEditingController(),
+  phoneNumberController =TextEditingController(),
+  nameController =TextEditingController(),
+  addressController =TextEditingController(),
+  promoCodeController =TextEditingController(),
+  emailController =TextEditingController();
+// "Ever wondered what's on a Big Mac®? The McDonald's Big Mac® is a 100% beef burger with a taste like no other.The mouthwatering perfection starts with two 100% pure",
+  //imageSrc;
 
 class _SignUpPageState extends State<SignUpPage> {
   @override
@@ -50,6 +70,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 80 ,24,0),
               child: TextField(
+                controller: nameController,
                  decoration: InputDecoration(
                    border: InputBorder.none,
                    labelText: "Name",
@@ -57,6 +78,11 @@ class _SignUpPageState extends State<SignUpPage> {
                    filled: true,
                    fillColor:Color.fromRGBO(255, 255, 255, 1) ,
                    labelStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Color.fromRGBO(155, 155, 155, 1))) ,
+                onChanged: (value) {
+                  setState(() {
+                    name = value;
+                  });
+                },
 
                ),
             ),
@@ -64,6 +90,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 20 ,24,0),
               child: TextField(
+                controller: emailController,
                  decoration: InputDecoration(
                    border: InputBorder.none,
                    labelText: "Email",
@@ -71,7 +98,11 @@ class _SignUpPageState extends State<SignUpPage> {
                    filled: true,
                    fillColor:Color.fromRGBO(255, 255, 255, 1) ,
                    labelStyle: TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Color.fromRGBO(155, 155, 155, 1))) ,
-
+                onChanged: (value) {
+                  setState(() {
+                    email = value;
+                  });
+                },
                ),
             ),
 
@@ -79,6 +110,7 @@ class _SignUpPageState extends State<SignUpPage> {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 20 ,24,0),
               child: TextField(
+                controller: passWordController,
                  decoration: InputDecoration(
                    border: InputBorder.none,
                    labelText: "Password",
@@ -86,13 +118,18 @@ class _SignUpPageState extends State<SignUpPage> {
                    filled: true,
                    fillColor:Color.fromRGBO(255, 255, 255, 1) ,
                    labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(155, 155, 155, 1))) ,
-
+                onChanged: (value) {
+                  setState(() {
+                    password = value;
+                  });
+                },
                ),
             ),
 
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 20 ,24,0),
               child: TextField(
+                controller: addressController,
                 decoration: InputDecoration(
                     border: InputBorder.none,
                     labelText: "address",
@@ -100,13 +137,18 @@ class _SignUpPageState extends State<SignUpPage> {
                     filled: true,
                     fillColor:Color.fromRGBO(255, 255, 255, 1) ,
                     labelStyle: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(155, 155, 155, 1))) ,
-
+                onChanged: (value) {
+                  setState(() {
+                    address = value;
+                  });
+                },
               ),
             ),
 
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 20 ,24,0),
               child: TextField(
+                controller: phoneNumberController,
                  decoration: InputDecoration(
                    border: InputBorder.none,
                    labelText: "+966",
@@ -116,7 +158,11 @@ class _SignUpPageState extends State<SignUpPage> {
                    filled: true,
                    fillColor:Color.fromRGBO(255, 255, 255, 1) ,
                    labelStyle:TextStyle(fontSize: 11, fontWeight: FontWeight.w400, color: Color.fromRGBO(155, 155, 155, 1))) ,
-
+                onChanged: (value) {
+                  setState(() {
+                    phoneNumber =int.parse(value);
+                  });
+                },
                ),
             ),
 
@@ -131,8 +177,16 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 child: TextButton(
                 onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(
-                  builder:(context)=> verificationPage()));
+                  Get.to(()=> verificationPage(
+                    password: password,
+                    rating: rating,
+                    address: address,
+                    name: name,
+                    promoCode: promoCode,
+                    phoneNumber: phoneNumber,
+                    email: email,
+                    imageSrc: email,
+                  ));
                 }, 
                 child: Text("SIGN UP", style:TextStyle(
                     fontSize: 20,fontWeight: FontWeight.w700, color:Colors.white)),)

@@ -1,11 +1,11 @@
 
 class UserRequests {
   final String pTitle;
-  final double pPrice;
-  final int pCount;
+   double pPrice;
+   int pCount;
   final String pImageAssets;
   final String pSize;
-  final List<String> pComponent;
+  final String pComponent;
 
 
   UserRequests(
@@ -23,7 +23,7 @@ class UserRequests {
     return {
       "image":pImageAssets,
       "title": pTitle,
-      "price": pPrice,
+      "price": pPrice.toDouble(),
       "count": pCount,
       "size": pSize,
       "component": pComponent,
@@ -33,7 +33,7 @@ class UserRequests {
     return   UserRequests(
       pImageAssets:map["image"],
       pTitle: map['title'],
-      pPrice: map['price'],
+      pPrice: map['price'].toDouble(),
       pCount: map['count'],
       pSize: map['size'],
       pComponent: map['component'],
@@ -43,6 +43,8 @@ class UserRequests {
 
 List <UserRequests>userCartRequests =[];
 
+// List <UserRequests>SelectedUserCartRequests =[];
+
 void addUserCartRequests(
     {
       required String pTitle ,
@@ -50,7 +52,7 @@ void addUserCartRequests(
       required int pCount,
       required String imageAssets,
       required   String pSize,
-      required List<String> pComponent,
+      required String pComponent,
 
     })
 {

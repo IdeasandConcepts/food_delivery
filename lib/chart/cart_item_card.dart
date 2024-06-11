@@ -22,6 +22,18 @@ class CartItemCard extends StatefulWidget {
 class _CartItemCardState extends State<CartItemCard> {
 
 int counter=1;
+double newPrice=1.0;
+@override
+  void initState() {
+    // TODO: implement initState
+  newPrice=widget.userRequest.pPrice*counter;
+    super.initState();
+  }
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,9 +111,15 @@ int counter=1;
                                   height: 36,
                                   child: IconButton(
                                     onPressed: (){
-                                      setState(() {
-                                        counter--;
+
+                                        if(counter>1) {
+                                          setState(() {
+                                          counter--;
+                                          newPrice = counter *
+                                              widget.userRequest.pPrice;
+
                                       });
+                                        }
                                       // counter++;
                                     },
                                     icon:
@@ -134,6 +152,7 @@ int counter=1;
                                     onPressed: (){
                                       setState(() {
                                         counter++;
+                                        newPrice=counter*widget.userRequest.pPrice;
                                       });
                                      // counter++;
                                     },
@@ -154,7 +173,7 @@ int counter=1;
 
                       Padding(
                         padding: const EdgeInsets.fromLTRB(65, 12,0,0),
-                        child: Text("${counter * widget.userRequest.pPrice}", style:  TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(34, 34, 34, 1))),),
+                        child: Text("${ newPrice}", style:  TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(34, 34, 34, 1))),),
 
 
 
