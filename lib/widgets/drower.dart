@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,15 +8,14 @@ import 'package:food_delivery/controller/services/services.dart';
 import 'package:food_delivery/widgets/default_button.dart';
 import 'package:get/get.dart';
 
-
 class UserDrawer extends StatefulWidget {
- // final int phone;
+  // final int phone;
   final String name, profileImage;
   //final String branch;
   const UserDrawer({
     super.key,
     required this.name,
-   // required this.market,
+    // required this.market,
     required this.profileImage,
     // required this.branch,
     // required this.phone,
@@ -70,7 +68,9 @@ class _UserDrawerState extends State<UserDrawer> {
                   const Icon(Icons.arrow_forward),
                 ],
               ),
-              onTap: () {},
+              onTap: () {
+                print(widget.profileImage);
+              },
             ),
             ListTile(
               leading: Container(
@@ -116,20 +116,20 @@ class _UserDrawerState extends State<UserDrawer> {
                             fontSize: 12, fontWeight: FontWeight.bold))),
                 title: (sharedlang == "ar")
                     ? const Icon(
-                  Icons.done,
-                  color: kprimaryColor,
-                )
+                        Icons.done,
+                        color: kprimaryColor,
+                      )
                     : null,
               ),
             if (openLang == true)
               StatefulBuilder(
                 builder: (context, setState) =>
-                //child:
-                ListTile(
+                    //child:
+                    ListTile(
                   leading: ElevatedButton(
                       onPressed: () {
                         controller.changLang("en");
-                        setState((){
+                        setState(() {
                           controller.changLang("en");
                         });
                         Get.offAll(AndroidAuthPage());
@@ -140,9 +140,9 @@ class _UserDrawerState extends State<UserDrawer> {
                               fontSize: 12, fontWeight: FontWeight.bold))),
                   title: (sharedlang == "en")
                       ? const Icon(
-                    Icons.done,
-                    color: kprimaryColor,
-                  )
+                          Icons.done,
+                          color: kprimaryColor,
+                        )
                       : null,
                 ),
               ),
@@ -176,7 +176,7 @@ class _UserDrawerState extends State<UserDrawer> {
                     color: Colors.white,
                   )),
               title: //
-              GestureDetector(
+                  GestureDetector(
                 child: Text("Logout".tr),
                 onTap: () {
                   Get.defaultDialog(
@@ -211,13 +211,13 @@ class _UserDrawerState extends State<UserDrawer> {
             ),
           ],
         )
-      // Container(
-      //   child: buildHeader(context),
-      //   decoration:
-      //       BoxDecoration(borderRadius: BorderRadius.circular(30)),
-      // ),
-      // buildMenueItems(context),
-      //   ],
-    );
+        // Container(
+        //   child: buildHeader(context),
+        //   decoration:
+        //       BoxDecoration(borderRadius: BorderRadius.circular(30)),
+        // ),
+        // buildMenueItems(context),
+        //   ],
+        );
   }
 }

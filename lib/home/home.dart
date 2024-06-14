@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:circle_nav_bar/circle_nav_bar.dart';
@@ -18,13 +17,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../model/users.dart';
 
-
 class HomeScreen extends StatefulWidget {
- final String user;
+  final String user;
   final String profileImage;
   // final int phoneNumber;
-  const HomeScreen({Key? key,
-   required this.user,
+  const HomeScreen({
+    Key? key,
+    required this.user,
     required this.profileImage,
     // required this.phoneNumber
   }) : super(key: key);
@@ -44,9 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-
   // final Rxn<int> selected = Rxn<int>();
-  late PageController pageController=PageController();
+  late PageController pageController = PageController();
 
   @override
   void initState() {
@@ -114,59 +112,77 @@ class _HomeScreenState extends State<HomeScreen> {
         },
         children: [
           HomePage(
-          //  phoneNumber: widget.phoneNumber,
-           user: widget.user,
-           profileImage: widget.profileImage,
+            //  phoneNumber: widget.phoneNumber,
+            user: widget.user,
+            profileImage: widget.profileImage,
           ),
-          FavoriteScreen(
-           user: widget.user
-          ),
+          FavoriteScreen(user: widget.user),
           // Container(width: double.infinity,
           //     height: double.infinity,
           //     color: Colors.green),
           //Container(width: double.infinity, height: double.infinity, color: Colors.red),
           MyCartScreen(
-profileImage: widget.profileImage,
+            profileImage: widget.profileImage,
             //phoneNumber: widget.phoneNumber,
             user: widget.user,
-
           ),
-      //     InkWell(
-      //       child:
-      //       Container(width: double.infinity, height: double.infinity, color: Colors.green),
-      // onTap: (){
-      //   openWhatsapp(context: context);
-      //       }
-      //     ),
+          //     InkWell(
+          //       child:
+          //       Container(width: double.infinity, height: double.infinity, color: Colors.green),
+          // onTap: (){
+          //   openWhatsapp(context: context);
+          //       }
+          //     ),
 
           profile(
             user: widget.user,
-
             profileImage: widget.profileImage,
           )
           //Container(width: double.infinity, height: double.infinity, color: Colors.blue),
         ],
       ),
-      bottomNavigationBar:
-      CircleNavBar(
+      bottomNavigationBar: CircleNavBar(
         circleColor: Colors.white,
         //circleShadowColor: kprimaryColor,
-        activeIcons:  [
-          Icon(Icons.home, color: kprimaryColor,),
+        activeIcons: [
+          Icon(
+            Icons.home,
+            color: kprimaryColor,
+          ),
 
-          Icon(Icons.favorite, color: kprimaryColor,),
-          Icon(Icons.shopping_cart, color: kprimaryColor,),
+          Icon(
+            Icons.favorite,
+            color: kprimaryColor,
+          ),
+          Icon(
+            Icons.shopping_cart,
+            color: kprimaryColor,
+          ),
           //Icon(Icons.comment, color: kprimaryColor),
-          Icon(Icons.person, color: kprimaryColor,),
+          Icon(
+            Icons.person,
+            color: kprimaryColor,
+          ),
         ],
         inactiveIcons: const [
-          Icon(Icons.home, color: kprimaryColor,),
+          Icon(
+            Icons.home,
+            color: kprimaryColor,
+          ),
 
-          Icon(Icons.favorite, color: kprimaryColor,),
-          Icon(Icons.shopping_cart, color: kprimaryColor,),
-         // Icon(Icons.comment, color: kprimaryColor),
-          Icon(Icons.person, color: kprimaryColor,),
-
+          Icon(
+            Icons.favorite,
+            color: kprimaryColor,
+          ),
+          Icon(
+            Icons.shopping_cart,
+            color: kprimaryColor,
+          ),
+          // Icon(Icons.comment, color: kprimaryColor),
+          Icon(
+            Icons.person,
+            color: kprimaryColor,
+          ),
         ],
 
         color: Colors.black,
@@ -179,17 +195,15 @@ profileImage: widget.profileImage,
           tabIndex = index;
           pageController.jumpToPage(tabIndex);
         },
-        padding: const EdgeInsets.only(top: 5),
+        // padding: const EdgeInsets.only(top: 5),
 
         shadowColor: Colors.white,
         elevation: 10,
       ),
-
-
     );
   }
 
-   openWhatsapp({required BuildContext context}) async {
+  openWhatsapp({required BuildContext context}) async {
     String whatsapp = '+92****';
     String whatsappURlAndroid = "whatsapp://send?phone=$whatsapp&text=hello";
     String whatsappURLIos =

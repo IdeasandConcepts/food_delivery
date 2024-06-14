@@ -1,42 +1,45 @@
-
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:developer';
 
 import 'package:food_delivery/model/products.dart';
+import 'package:get/get.dart';
 
-class  FavoriteMeals {
+class FavoriteMeals {
   final Products products;
   final String userName;
 
+  FavoriteMeals({required this.products, required this.userName});
 
+  @override
+  bool operator ==(covariant FavoriteMeals other) {
+    if (identical(this, other)) return true;
 
-  FavoriteMeals(
-      {
-   required this.products,
-   required this.userName
-      }
-      );
+    return other.products == products && other.userName == userName;
+  }
 
-
-
+  @override
+  int get hashCode => products.hashCode ^ userName.hashCode;
 }
 
-List <FavoriteMeals> userFavoriteMeals =[];
+List<FavoriteMeals> userFavoriteMeals = [];
 
-void adduserFavoriteMeals(
-    {
+void adduserFavoriteMeals({
+  required String userName,
+  required Products products,
+}) {
+  final newDetails = FavoriteMeals(userName: userName, products: products);
 
-      required String userName,
-      required Products products,
+  if (isFavorite(userName: userName, products: products)) {
+    userFavoriteMeals.removeWhere((element) => element == newDetails);
+  } else {
+    userFavoriteMeals.add(newDetails);
+  }
+}
 
-
-    })
-{
-  final newDetails= FavoriteMeals(
- userName: userName,
-    products: products
-
-
-  );
-
-  userFavoriteMeals.add(newDetails);
+bool isFavorite({
+  required String userName,
+  required Products products,
+}) {
+  final newDetails = FavoriteMeals(userName: userName, products: products);
+  return userFavoriteMeals.contains(newDetails);
 }
