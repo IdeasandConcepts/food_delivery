@@ -215,7 +215,11 @@ class _MyOrdersState extends State<MyOrders> with TickerProviderStateMixin {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Get.to(() => OrderDetails(
+                              userOrdersList: userOrdersList,
+                            ));
+                      },
                       child: Text(
                         "Details",
                         style: TTextTheme.lightTextThem.labelLarge,
