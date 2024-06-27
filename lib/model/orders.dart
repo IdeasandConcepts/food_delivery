@@ -1,9 +1,12 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 
-import 'package:food_delivery/model/users.dart';
+import 'package:flutter/foundation.dart';
+
 import 'package:food_delivery/model/request.dart';
+import 'package:food_delivery/model/users.dart';
 
-
-class  Orders {
+class Orders {
   final String user;
 
   final String profileImage;
@@ -19,80 +22,163 @@ class  Orders {
   final String uTime;
   //final int uTotalRequests;
   final double uTotalPrice;
-  final double lat,lan;
+  final double lat;
+  final double lan;
   final String deliveryMethod;
 
-
-   Orders(
-      {
-        required this.profileImage,
-        required this.user,
-        required this.step,
-        required this.deliveryTime,
-        required this.acceptedTime,
-        required this.id,
-        required this.deliveryMethod,
-        required this.requests,
-        required this.paymentMethod,
-        required this.uDate,
-        required this.uTime,
-        required this.orderNumber,
-        required this.status,
-        required this.uTotalPrice,
-        required this.lat,
-        required this.lan
-      }
-      );
+  Orders({
+    required this.user,
+    required this.profileImage,
+    required this.step,
+    required this.deliveryTime,
+    required this.id,
+    required this.orderNumber,
+    required this.status,
+    required this.acceptedTime,
+    required this.requests,
+    required this.paymentMethod,
+    required this.uDate,
+    required this.uTime,
+    required this.uTotalPrice,
+    required this.lat,
+    required this.lan,
+    required this.deliveryMethod,
+  });
 
   Map<String, dynamic> toMap() {
-    return {
-      'profile_image':profileImage,
-      'user':user ,
-          //.fromMap((e) => e.toMap()),
-      'step':step,
-      "delivery_time":deliveryTime,
-      'id':id,
-      'accepted_time':acceptedTime,
-      "delivery_method":deliveryMethod,
+    return <String, dynamic>{
+      'user': user,
+      'profileImage': profileImage,
+      'step': step,
+      'deliveryTime': deliveryTime,
+      'id': id,
+      'orderNumber': orderNumber,
       'status': status,
-      'u_date': uDate,
-      'u_time': uTime,
-      'payment_method': paymentMethod,
-      "total_price":uTotalPrice.toDouble(),
-      "lan": lan.toDouble(),
-      'lat':lat.toDouble(),
-      'order_number':orderNumber.toDouble(),
-      'requests':requests.map((e) => e.toMap()).toList(),
-      //List<InventoryProduct>.toMap['inventoryProduct'])
-      //
-      // inventoryProduct.map((i)=>
-      //        i.()).toList(),
+      'acceptedTime': acceptedTime,
+      'requests': requests.map((x) => x.toMap()).toList(),
+      'paymentMethod': paymentMethod,
+      'uDate': uDate,
+      'uTime': uTime,
+      'uTotalPrice': uTotalPrice,
+      'lat': lat,
+      'lan': lan,
+      'deliveryMethod': deliveryMethod,
     };
   }
 
   factory Orders.fromMap(Map<String, dynamic> map) {
     return Orders(
-      profileImage: map['profile_image'],
-     user: map['map'],
-     // user :(map['user']).map((data)=>Customers.fromMap(data)),
-      //(phoneNumber: phoneNumber, name: name, address: address, promoCode: promoCode, email: email, imageSrc: imageSrc),
-      step: map['step'],
-      deliveryTime: map['delivery_time'],
-      id: map['id'],
-      acceptedTime: map['accepted_time'],
-      orderNumber: map['order_number'].toDouble(),
-      status: map['status'],
-      deliveryMethod: map['delivery_method'],
-      uDate: map['u_date'],
-      uTime: map['u_time'],
-      paymentMethod: map['payment_method'],
-      uTotalPrice: map['total_price'].toDouble(),
-      lat:map["lat"].toDouble(),
-      lan:map["lan"].toDouble(),
-      requests: (map['requests'] as List)
-          .map((data) => UserRequests.fromMap(data)).toList(),
-
+      user: map['user'] ?? '',
+      profileImage: map['profile_image'] ?? '',
+      step: map['step'] ?? '',
+      deliveryTime: map['delivery_time'] ?? '',
+      id: map['id'] ?? 0,
+      orderNumber: map['order_number'] as double,
+      status: map['status'] as String,
+      acceptedTime: map['accepted_time'] as String,
+      requests: List<UserRequests>.from(
+        (map['requests'] as List).map<UserRequests>(
+          (x) => UserRequests.fromMap(x as Map<String, dynamic>),
+        ),
+      ),
+      paymentMethod: map['payment_method'] as String,
+      uDate: map['u_date'] as String,
+      uTime: map['u_time'] as String,
+      uTotalPrice: map['total_price'] as double,
+      lat: map['lat'] as double,
+      lan: map['lan'] as double,
+      deliveryMethod: map['delivery_method'] as String,
     );
+  }
+
+  Orders copyWith({
+    String? user,
+    String? profileImage,
+    String? step,
+    String? deliveryTime,
+    double? id,
+    double? orderNumber,
+    String? status,
+    String? acceptedTime,
+    List<UserRequests>? requests,
+    String? paymentMethod,
+    String? uDate,
+    String? uTime,
+    double? uTotalPrice,
+    double? lat,
+    double? lan,
+    String? deliveryMethod,
+  }) {
+    return Orders(
+      user: user ?? this.user,
+      profileImage: profileImage ?? this.profileImage,
+      step: step ?? this.step,
+      deliveryTime: deliveryTime ?? this.deliveryTime,
+      id: id ?? this.id,
+      orderNumber: orderNumber ?? this.orderNumber,
+      status: status ?? this.status,
+      acceptedTime: acceptedTime ?? this.acceptedTime,
+      requests: requests ?? this.requests,
+      paymentMethod: paymentMethod ?? this.paymentMethod,
+      uDate: uDate ?? this.uDate,
+      uTime: uTime ?? this.uTime,
+      uTotalPrice: uTotalPrice ?? this.uTotalPrice,
+      lat: lat ?? this.lat,
+      lan: lan ?? this.lan,
+      deliveryMethod: deliveryMethod ?? this.deliveryMethod,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Orders.fromJson(String source) =>
+      Orders.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  @override
+  String toString() {
+    return 'Orders(user: $user, profileImage: $profileImage, step: $step, deliveryTime: $deliveryTime, id: $id, orderNumber: $orderNumber, status: $status, acceptedTime: $acceptedTime, requests: $requests, paymentMethod: $paymentMethod, uDate: $uDate, uTime: $uTime, uTotalPrice: $uTotalPrice, lat: $lat, lan: $lan, deliveryMethod: $deliveryMethod)';
+  }
+
+  @override
+  bool operator ==(covariant Orders other) {
+    if (identical(this, other)) return true;
+
+    return other.user == user &&
+        other.profileImage == profileImage &&
+        other.step == step &&
+        other.deliveryTime == deliveryTime &&
+        other.id == id &&
+        other.orderNumber == orderNumber &&
+        other.status == status &&
+        other.acceptedTime == acceptedTime &&
+        listEquals(other.requests, requests) &&
+        other.paymentMethod == paymentMethod &&
+        other.uDate == uDate &&
+        other.uTime == uTime &&
+        other.uTotalPrice == uTotalPrice &&
+        other.lat == lat &&
+        other.lan == lan &&
+        other.deliveryMethod == deliveryMethod;
+  }
+
+  @override
+  int get hashCode {
+    return user.hashCode ^
+        profileImage.hashCode ^
+        step.hashCode ^
+        deliveryTime.hashCode ^
+        id.hashCode ^
+        orderNumber.hashCode ^
+        status.hashCode ^
+        acceptedTime.hashCode ^
+        requests.hashCode ^
+        paymentMethod.hashCode ^
+        uDate.hashCode ^
+        uTime.hashCode ^
+        uTotalPrice.hashCode ^
+        lat.hashCode ^
+        lan.hashCode ^
+        deliveryMethod.hashCode;
   }
 }
 

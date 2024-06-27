@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,7 +10,6 @@ import 'package:food_delivery/const.dart';
 import 'package:food_delivery/home/home.dart';
 import 'package:food_delivery/auth/auth_helper.dart';
 import 'package:food_delivery/auth/auth_page.dart';
-
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -27,15 +25,16 @@ class _LoginPageState extends State<LoginPage> {
   TextEditingController emailController = TextEditingController();
   final _formkey = GlobalKey<FormState>();
   TextEditingController passwordcontroller = TextEditingController();
-  String idstr="", passwordstr="";
+  String idstr = "", passwordstr = "";
 
-  bool _obscureText=false;
+  bool _obscureText = false;
 
-  void toggle(){
+  void toggle() {
     setState(() {
-      _obscureText=!_obscureText;
+      _obscureText = !_obscureText;
     });
   }
+
   @override
   Widget build(BuildContext context) {
     // final currentWidth = MediaQuery.of(context).size.width-36.4285;
@@ -43,10 +42,12 @@ class _LoginPageState extends State<LoginPage> {
     //return const Placeholder();
 
     return Scaffold(
-
-      body: SingleChildScrollView(
-
+        body: SingleChildScrollView(
+      child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.h),
+        height: MediaQuery.of(context).size.height,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Padding(
             //   // padding: const EdgeInsets.fromLTRB(14, 106, 0,0),
@@ -56,159 +57,171 @@ class _LoginPageState extends State<LoginPage> {
             Form(
               key: _formkey,
               child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Material(
+                      elevation: 15,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        width: 300.w,
+                        height: 60.h,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: TextFormField(
+                          // maxLines: 1,
+                          keyboardType: TextInputType.emailAddress,
+                          controller: emailController,
+                          // controller: username,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 10),
+                            prefixIcon: Icon(Icons.email),
+                            border: InputBorder.none,
+                            labelText: "Email".tr,
+                            hintStyle: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 14.sp),
+                          ),
+                          onSaved: (newValue) {
+                            idstr = newValue!;
+                            idstr = emailController.text;
+                          },
+                          onChanged: (newValue) {
+                            idstr = newValue;
+                            idstr = emailController.text;
+                          },
+                        ),
+                      )),
+                  SizedBox(height: 29.h),
+                  Material(
+                      //color:kBackgroundColor,
+                      borderRadius: BorderRadius.circular(0),
+                      elevation: 15,
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        width: 300.w,
+                        height: 60.h,
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(0),
+                          //color: const Color(0xffF6F6F6),
+                        ),
+                        child: TextFormField(
+                          keyboardType: TextInputType.text,
+                          obscureText: !_obscureText,
+                          controller: passwordcontroller,
+                          // controller: username,
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 8, horizontal: 10),
+                            // floatingLabelBehavior: FloatingLabelBehavior.always,
+                            prefixIcon: Icon(
+                              Icons.lock,
+                              color: Colors.black,
+                            ),
+                            suffixIcon: IconButton(
+                              onPressed: () {
+                                toggle();
+                              },
+                              icon: Icon(
+                                Icons.visibility,
+                                color: Colors.black,
+                              ),
+                            ),
+                            border: InputBorder.none,
+                            labelText: "Password".tr,
+                            hintStyle: TextStyle(
+                                color: Colors.white,
+                                //const Color(0xff9B9B9B),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 14.sp),
+                            // border: InputBorder.none,
+                          ),
 
-        Material(
-        elevation: 15,
-        child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 10.w),
-    width: 300.w,
-    height:  60.h,
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular( 20),
-    ),
-    child: TextFormField(
-    // maxLines: 1,
-    keyboardType: TextInputType.emailAddress,
-    controller: emailController,
-    // controller: username,
-    decoration: InputDecoration(
-    contentPadding:
-    EdgeInsets.symmetric(
-    vertical: 8, horizontal: 10),
-    prefixIcon: Icon(Icons.email),
-    border: InputBorder.none,
-    labelText: "Email".tr,
-    hintStyle: TextStyle(
-    fontWeight: FontWeight.w400,
-    fontSize: 14.sp),
-    ),
-    onSaved: (newValue) {
-    idstr = newValue!;
-    idstr = emailController.text;
-    },
-    onChanged: (newValue) {
-    idstr = newValue;
-    idstr = emailController.text;
-    },
-    ),
-    )),
-    SizedBox(height: 29.h),
-
-    Material(
-    //color:kBackgroundColor,
-    borderRadius: BorderRadius.circular(0),
-    elevation: 15,
-    child: Container(
-    padding: EdgeInsets.symmetric(horizontal: 10.w),
-    width: 300.w,
-    height:  60.h,
-    alignment: Alignment.center,
-    decoration: BoxDecoration(
-    borderRadius: BorderRadius.circular( 0),
-    //color: const Color(0xffF6F6F6),
-    ),
-    child: TextFormField(
-    keyboardType: TextInputType.text,
-    obscureText: !_obscureText,
-    controller: passwordcontroller,
-    // controller: username,
-    decoration: InputDecoration(
-    contentPadding:
-    EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-    // floatingLabelBehavior: FloatingLabelBehavior.always,
-    prefixIcon: Icon(Icons.lock,color: Colors.black,),
-    suffixIcon: IconButton(
-    onPressed: (){
-    toggle();
-    },
-    icon: Icon(Icons.visibility,color: Colors.black,),
-    ),
-    border: InputBorder.none,
-    labelText: "Password".tr,
-    hintStyle: TextStyle(
-    color: Colors.white,
-    //const Color(0xff9B9B9B),
-    fontWeight: FontWeight.w400,
-    fontSize: 14.sp),
-    // border: InputBorder.none,
-    ),
-
-    // labelText: "Password",
-    onSaved: (newValue) {
-    idstr = newValue!;
-    idstr = passwordcontroller.text;
-    },
-    onChanged: (newValue) {
-    idstr = newValue;
-    idstr = passwordcontroller.text;
-    },
-    ),
-    )),
-
-
-              ],
-      ),
+                          // labelText: "Password",
+                          onSaved: (newValue) {
+                            idstr = newValue!;
+                            idstr = passwordcontroller.text;
+                          },
+                          onChanged: (newValue) {
+                            idstr = newValue;
+                            idstr = passwordcontroller.text;
+                          },
+                        ),
+                      )),
+                ],
+              ),
             ),
             InkWell(
-              onTap: (){
-                Get.to(()=>ForgetPage());
-              },
-              child:  Padding(
-                padding: const EdgeInsets.only(top:13,left: 106,right:106),
-                child: Text("Forgot your password?",
-                    style:  TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color: Color.fromRGBO(252, 15, 15, 1))),),
-
-            ),
-            InkWell(
-              onTap: (){
-                Get.to(()=>SignUpPage());
+              onTap: () {
+                Get.to(() => ForgetPage());
               },
               child: Padding(
-                padding: const EdgeInsets.only(left: 90,right: 90,top: 8),
-                child: Text("don't have an account?", style:TextStyle(
-                  fontSize: 18, )),),
-
+                padding: const EdgeInsets.only(top: 13, left: 106, right: 106),
+                child: Text("Forgot your password?",
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromRGBO(252, 15, 15, 1))),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                Get.to(() => SignUpPage());
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 90, right: 90, top: 8),
+                child: Text("don't have an account?",
+                    style: TextStyle(
+                      fontSize: 18,
+                    )),
+              ),
             ),
 
-
-          SizedBox(height: 51.h),
-          GestureDetector(
-            onTap: () async{
-              if (_formkey.currentState?.validate() == true)
-                _formkey.currentState?.save();
-              {
-                //try {
-                final user = await AuthHelper.signWithemail(
-                  //.signInWithEmailAndPassword(
-                    emailController.text.toString().trim(),
-                    passwordcontroller.text.toString().trim());
-                if (user != null) {
-                  Get.offAll(AndroidAuthPage());
-                  // }
-                }}
-            },
-            child: DefualtButton(
-              text: "LOGIN".tr,
-              //selected: true,
-
+            SizedBox(height: 51.h),
+            GestureDetector(
+              onTap: () async {
+                if (_formkey.currentState?.validate() == true)
+                  _formkey.currentState?.save();
+                {
+                  //try {
+                  final user = await AuthHelper.signWithemail(
+                      //.signInWithEmailAndPassword(
+                      emailController.text.toString().trim(),
+                      passwordcontroller.text.toString().trim());
+                  if (user != null) {
+                    Get.offAll(AndroidAuthPage());
+                    // }
+                  }
+                }
+              },
+              child: DefualtButton(
+                text: "LOGIN".tr,
+                //selected: true,
+              ),
             ),
-          ),
             Padding(
-              padding: const EdgeInsets.only(left: 90,right: 90,top: 80),
-              child: Text("Big Kitchen Burger", style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500, color: Color.fromRGBO(34, 34, 34, 1))),),
+              padding: const EdgeInsets.only(left: 90, right: 90, top: 80),
+              child: Text("Big Kitchen Burger",
+                  style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(34, 34, 34, 1))),
+            ),
             Padding(
-              padding: const EdgeInsets.only(left: 110,right: 110,top: 10),
-              child: Text("At your Dinning Table", style: TextStyle(
-                  fontSize: 16, fontWeight: FontWeight.bold, color: kprimaryColor)),),
-
+              padding: const EdgeInsets.only(left: 110, right: 110, top: 10),
+              child: Text("At your Dinning Table",
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: kprimaryColor)),
+            ),
           ],
-        ) ,
-      )
-    );
+        ),
+      ),
+    ));
   }
   // Widget _errorMassage(){
   //   return Text(errorMessage == '' ? '' :'? $errorMessage');
@@ -242,7 +255,6 @@ class _LoginPageState extends State<LoginPage> {
   //     });
   //   }
 
-
   // Future<void> createUserWithEmailAndPassword() async{
   //   try{
   //     await Auth().createUserWithEmailAndPassword(
@@ -259,8 +271,6 @@ class _LoginPageState extends State<LoginPage> {
   User? get currentUser => _firebaseAuth.currentUser;
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   Stream<User?> get authStateChange {
-    return
-      _firebaseAuth.authStateChanges();
+    return _firebaseAuth.authStateChanges();
   }
-
 }
