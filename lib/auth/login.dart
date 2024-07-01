@@ -211,7 +211,7 @@ class _LoginPageState extends State<LoginPage> {
                       color: Color.fromRGBO(34, 34, 34, 1))),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 110, right: 110, top: 10),
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
               child: Text("At your Dinning Table",
                   style: TextStyle(
                       fontSize: 16,

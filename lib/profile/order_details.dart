@@ -148,7 +148,7 @@ class OrderDetails extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
                       child: Text(
-                        "userOrdersList.user.address",
+                        "${userOrdersList.lat}",
                         style: TTextTheme.lightTextThem.bodyMedium,
                         maxLines: 2,
                       ),
@@ -164,7 +164,7 @@ class OrderDetails extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
+                    padding:  EdgeInsets.only(right: 8.h),
                     child: Text(
                       "Payment Method:",
                       style: TTextTheme.lightTextThem.bodySmall,

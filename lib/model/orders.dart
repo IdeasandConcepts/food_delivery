@@ -4,11 +4,10 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 import 'package:food_delivery/model/request.dart';
-import 'package:food_delivery/model/users.dart';
+
 
 class Orders {
   final String user;
-
   final String profileImage;
   final String step;
   final String deliveryTime;
@@ -48,21 +47,21 @@ class Orders {
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'user': user,
-      'profileImage': profileImage,
+      'profile_image': profileImage,
       'step': step,
-      'deliveryTime': deliveryTime,
+      'delivery_time': deliveryTime,
       'id': id,
-      'orderNumber': orderNumber,
+      'order_number': orderNumber,
       'status': status,
-      'acceptedTime': acceptedTime,
+      'accepted_time': acceptedTime,
       'requests': requests.map((x) => x.toMap()).toList(),
-      'paymentMethod': paymentMethod,
-      'uDate': uDate,
-      'uTime': uTime,
-      'uTotalPrice': uTotalPrice,
+      'payment_method': paymentMethod,
+      'u_date': uDate,
+      'u_time': uTime,
+      'total_price': uTotalPrice,
       'lat': lat,
       'lan': lan,
-      'deliveryMethod': deliveryMethod,
+      'delivery_method': deliveryMethod,
     };
   }
 

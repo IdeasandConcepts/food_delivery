@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/const.dart';
 import 'package:food_delivery/model/orders.dart';
 import 'package:food_delivery/model/request.dart';
@@ -154,24 +155,16 @@ class _OrderLastReviewState extends State<OrderLastReview> {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.only(left: 30, right: 30, top: 70),
+                    padding: EdgeInsets.only(left: 20.h, right: 20.h, top: 70.h),
                     child: MaterialButton(
                         onPressed: () async {
-                          setState(() {
-                            _getCurrentLocation().then((value) {
-                              lat = double.parse('${value.latitude}');
-                              long = double.parse('${value.longitude}');
-                              currentLocation = "latitude" +
-                                  ":" +
-                                  "\t" +
-                                  "$lat" +
-                                  "\n" +
-                                  "langtude" +
-                                  ":" +
-                                  "\t" +
-                                  "${long}";
-                            });
+                          //  setState(() {
+                          _getCurrentLocation().then((value) {
+                            lat = double.parse('${value.latitude}');
+                            long = double.parse('${value.longitude}');
+                            currentLocation = "latitude" + ":" + "\t" + "$lat" + "\n" + "langtude" + ":" + "\t" + "${long}";
                           });
+                          //  });
                           // read location
 
                           // Create order
