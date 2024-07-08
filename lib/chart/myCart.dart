@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:food_delivery/home/home.dart';
 import 'package:food_delivery/model/users.dart';
+import 'package:food_delivery/payment/payment_type.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/chart/cart_item_card.dart';
 import 'package:food_delivery/chart/type-order.dart';
@@ -14,9 +16,10 @@ import 'package:food_delivery/model/request.dart';
 class MyCartScreen extends StatefulWidget {
   final String user;
   final String profileImage;
+  final String comeFrom;
   const MyCartScreen({super.key,
     required this.user,
-    required this.profileImage,});
+    required this.profileImage, required this.comeFrom,});
 
   @override
   State<MyCartScreen> createState() => _MyCartScreenState();
@@ -27,6 +30,8 @@ bool viewPromoCard=false;
 double commission=1.0;
 double totalAmount=0.0;
 double spaceBetween=220.0;
+
+bool selectPromoCode=false;
 //double price=0.0;
 @override
   void initState() {
@@ -73,21 +78,29 @@ double spaceBetween=220.0;
         children: [
 
           Padding(
-            padding: const EdgeInsets.fromLTRB(14, 18,0,0),
+            padding:  EdgeInsets.fromLTRB(14.h, 18.h,0,0),
             child: Text("My Cart", style:  TextStyle(
-                fontSize: 34, fontWeight: FontWeight.w700, color: Color.fromRGBO(34, 34, 34, 1))),
+                fontSize: 34.sp, fontWeight: FontWeight.w700,
+                color: Color.fromRGBO(34, 34, 34, 1))),
           ),
 (userCartRequests.length>0)?
   Column(
     children: <Widget>[
       Container(
-          height: MediaQuery.of(context).size.height - 500.0,
+       // color: kprimaryColor,
+          height:(widget.comeFrom=="Home")?
+    viewPromoCard==false?
+    MediaQuery.of(context).size.height - 380.h:
+    MediaQuery.of(context).size.height - 480.h:
+          viewPromoCard==false?
+          MediaQuery.of(context).size.height - 300.h:
+          MediaQuery.of(context).size.height - 420.h,
           child:
           ListView.builder(
               itemCount:   userCartRequests.length,
               itemBuilder: (context, index) {
                 return Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    padding:  EdgeInsets.symmetric(vertical: 10.h),
                     child: Dismissible(
                         key: Key(userCartRequests[index].toString()),
                         direction: DismissDirection.endToStart,
@@ -98,7 +111,7 @@ double spaceBetween=220.0;
                           });
                         },
                         background: Container(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
+                          padding: EdgeInsets.symmetric(horizontal: 10.w),
                           decoration: BoxDecoration(
                               color: Colors.grey,
                               //Color(0xFFFFF6E6),
@@ -121,7 +134,7 @@ double spaceBetween=220.0;
       ),
 
       Padding(
-        padding:  EdgeInsets.only(left:20.0,top: spaceBetween-20,right: 20.0),
+        padding:  EdgeInsets.only(left:20.0,right: 20.0),
         child: Row(
           // crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -162,58 +175,58 @@ double spaceBetween=220.0;
                   onPressed: (){
                   setState(() {
                   viewPromoCard=!viewPromoCard;
-                  if(spaceBetween==20) {
-                    spaceBetween = 220;
-                  }
-                  else {
-                    spaceBetween=20;
-                  }
+                  // if(spaceBetween==20) {
+                  //   spaceBetween = 220;
+                  // }
+                  // else {
+                  //   spaceBetween=20;
+                  // }
                 });
                 //return
-                showBottomSheet(
-                    context: context,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(34)),
-                    builder: (context) => Container(
-                      height: 464,
-                      child: Column(children: [
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 23 ,0,0),
-                          child: Container(
-                            height: 36,
-                            width: 343,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: Colors.grey.withOpacity(0.05),
-                                  spreadRadius: 0,
-                                  blurRadius: 8,
-                                  offset: Offset(0, 1), // changes position of shadow
-                                ),
-                              ],
-                            ),
-                            child: TextField(
-                              readOnly: true,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  labelText: "Enter your promo code",
-                                  //suffixIcon: selected== true? Icon(Icons.arrow_circle_right_outlined,size: 36,): Icon(Icons.close,size: 36,) ,
-                                  filled: true,
-                                  fillColor:Color.fromRGBO(255, 255, 255, 1) ,
-                                  labelStyle:TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(155, 155, 155, 1))) ,
-
-
-                            ),
-                          ),
-
-                        ),
-
-
-                        //Text("Your Promo Codes")
-
-                      ],),
-                    )
-                );
+                // showBottomSheet(
+                //     context: context,
+                //     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(34)),
+                //     builder: (context) => Container(
+                //       height: 464,
+                //       child: Column(children: [
+                //         Padding(
+                //           padding: const EdgeInsets.fromLTRB(0, 23 ,0,0),
+                //           child: Container(
+                //             height: 36,
+                //             width: 343,
+                //             decoration: BoxDecoration(
+                //               borderRadius: BorderRadius.circular(8),
+                //               boxShadow: [
+                //                 BoxShadow(
+                //                   color: Colors.grey.withOpacity(0.05),
+                //                   spreadRadius: 0,
+                //                   blurRadius: 8,
+                //                   offset: Offset(0, 1), // changes position of shadow
+                //                 ),
+                //               ],
+                //             ),
+                //             child: TextField(
+                //               readOnly: true,
+                //               decoration: InputDecoration(
+                //                   border: InputBorder.none,
+                //                   labelText: "Enter your promo code",
+                //                   //suffixIcon: selected== true? Icon(Icons.arrow_circle_right_outlined,size: 36,): Icon(Icons.close,size: 36,) ,
+                //                   filled: true,
+                //                   fillColor:Color.fromRGBO(255, 255, 255, 1) ,
+                //                   labelStyle:TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(155, 155, 155, 1))) ,
+                //
+                //
+                //             ),
+                //           ),
+                //
+                //         ),
+                //
+                //
+                //         //Text("Your Promo Codes")
+                //
+                //       ],),
+                //     )
+                // );
               }, icon: Icon(Icons.arrow_circle_right_outlined,size: 36,)),
             ),
 
@@ -262,7 +275,7 @@ double spaceBetween=220.0;
                 child: Text("Total amount:", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w500, color: Color.fromRGBO(155, 155, 155,1))),),
               Padding(
                 padding: const EdgeInsets.only(left:20,right: 20.0),
-                child: Text("${totalAmount}", style:  TextStyle(fontSize: 18, fontWeight: FontWeight.w900 , color: Color.fromRGBO(34, 34, 34,1))),),
+                child: Text("${totalAmount.toStringAsFixed(2)}", style:  TextStyle(fontSize: 18, fontWeight: FontWeight.w900 , color: Color.fromRGBO(34, 34, 34,1))),),
             ],
           ),
 
@@ -278,12 +291,19 @@ double spaceBetween=220.0;
                 ),
                 child: TextButton(
                   onPressed: (){
-                    Get.to(()=>OrderMethod(
+                    Get.to(() => PayMethod(
                       profileImage: widget.profileImage,
-                      totalAmount:totalAmount,
+                      totalAmount: totalAmount,
                       user: widget.user,
+                      deliveryMethod: "In Restaurant",
                       userOrdersList: userCartRequests,
                     ));
+                    // Get.to(()=>OrderMethod(
+                    //   profileImage: widget.profileImage,
+                    //   totalAmount:totalAmount,
+                    //   user: widget.user,
+                    //   userOrdersList: userCartRequests,
+                    // ));
                   },
                   child: Text("CHECK OUT", style: TextStyle(fontSize: 20,fontWeight: FontWeight.w700, color: Color.fromRGBO(255, 255, 255, 1))),)
             ),
@@ -385,10 +405,15 @@ double spaceBetween=220.0;
                   ),
                   child: TextButton(
                       onPressed: (){
+                        if(selectPromoCode==false)
                         setState(() {
-                          viewPromoCard=false;
                           totalAmount=totalAmount-totalAmount*offer/100;
                           spaceBetween=220;
+                          selectPromoCode=true;
+                          viewPromoCard=false;
+                        });
+                        setState(() {
+                          viewPromoCard=false;
                         });
                         //commision=
                       },

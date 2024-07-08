@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/chart/order_last_review.dart';
 import 'package:food_delivery/model/users.dart';
+import 'package:food_delivery/report/report.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:food_delivery/chart/CreditCards.dart';
@@ -49,7 +50,9 @@ class _PayMethodState extends State<PayMethod> {
                     setState(() {
                       payMethod="Cash";
                     });
-                    Get.to(()=>OrderLastReview(
+                    Get.to(()=>
+
+                        OrderLastReview(
                       profileImage: widget.profileImage,
                       totalAmount: widget.totalAmount,
                       paymentMethod: "Credit Cart",

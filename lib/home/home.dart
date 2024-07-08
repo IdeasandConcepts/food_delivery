@@ -116,12 +116,14 @@ class _HomeScreenState extends State<HomeScreen> {
             user: widget.user,
             profileImage: widget.profileImage,
           ),
-          FavoriteScreen(user: widget.user),
+          //Container(),
+         // FavoriteScreen(user: widget.user),
           // Container(width: double.infinity,
           //     height: double.infinity,
           //     color: Colors.green),
           //Container(width: double.infinity, height: double.infinity, color: Colors.red),
           MyCartScreen(
+            comeFrom: "Home",
             profileImage: widget.profileImage,
             //phoneNumber: widget.phoneNumber,
             user: widget.user,
@@ -150,10 +152,10 @@ class _HomeScreenState extends State<HomeScreen> {
             color: kprimaryColor,
           ),
 
-          Icon(
-            Icons.favorite,
-            color: kprimaryColor,
-          ),
+          // Icon(
+          //   Icons.favorite,
+          //   color: kprimaryColor,
+          // ),
           Icon(
             Icons.shopping_cart,
             color: kprimaryColor,
@@ -170,10 +172,10 @@ class _HomeScreenState extends State<HomeScreen> {
             color: kprimaryColor,
           ),
 
-          Icon(
-            Icons.favorite,
-            color: kprimaryColor,
-          ),
+          // Icon(
+          //   Icons.favorite,
+          //   color: kprimaryColor,
+          // ),
           Icon(
             Icons.shopping_cart,
             color: kprimaryColor,

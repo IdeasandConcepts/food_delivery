@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:food_delivery/const.dart';
 
@@ -16,7 +17,7 @@ class DiscountBanner extends StatelessWidget {
            // margin: EdgeInsets.symmetric(horizontal: 20),
             // padding: EdgeInsets.only(
             //     left: 15, right: 10,top: 10),
-            height: 103,
+            height: 80.h,
             width: //180,
             double.infinity,
             decoration: BoxDecoration(
@@ -27,13 +28,13 @@ class DiscountBanner extends StatelessWidget {
           children: [
 
             Positioned(
-              top: 10,
-              left: MediaQuery.of(context).size.width/2.5,
-              right:  MediaQuery.of(context).size.width/10,
+              top: 10.h,
+              left: (MediaQuery.of(context).size.width/3).h,
+              right:  (MediaQuery.of(context).size.width/15).h,
               child: Padding(
                 padding: EdgeInsets.only(top: 0),
                 child: Container(
-                  width: 100,
+                 // width: 150.w,
                   // margin: EdgeInsets.symmetric(horizontal: 20),
                   // padding: EdgeInsets.only(
                   //     left: 15, right: 10,),
@@ -42,19 +43,19 @@ class DiscountBanner extends StatelessWidget {
                     color:  kprimaryColor,
                   ),
                   child: Text("Get 20% Discount on everything you buy this week".tr ,
-                      style: TextStyle(color: Colors.black,fontSize: 14,fontWeight: FontWeight.bold),
+                      style: TextStyle(color: Colors.black,fontSize: 12.sp,fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ),
             Positioned(
                 //bottom: 10,
-                right: MediaQuery.of(context).size.width/15,
-               top: 70,
+                right: (MediaQuery.of(context).size.width/15).h,
+               top: 50.h,
                // right:  MediaQuery.of(context).size.width/5,
                 child:    Container(
-              height: 25,
-              width: 98,
+              height: 25.h,
+              width: 98.w,
               decoration: BoxDecoration(
                 border: Border.all(),
                 color: Colors.black,
@@ -75,7 +76,7 @@ class DiscountBanner extends StatelessWidget {
                 child: Container(
                     // padding: EdgeInsets.only(
                     //     left: 15, right: 15),
-                    height: 144,
+                    //height: 104,
                     child: Image.asset("assets/images/women.png"))),
         ]
         ),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/model/products.dart';
 import 'package:food_delivery/model/users.dart';
 import 'package:get/get.dart';
@@ -38,9 +39,9 @@ class _HomeDetailsState extends State<HomeDetails> {
             return GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  childAspectRatio: 0.99,
-                  crossAxisSpacing: 12.5,
-                  mainAxisSpacing: 12.5,
+                  childAspectRatio: 0.99.h,
+                  crossAxisSpacing: 12.5.h,
+                  mainAxisSpacing: 12.5.h,
                   // shrinkWrap: true,
                   // padding: EdgeInsets.only(left:15.0,right: 15.0),
                 ),
@@ -78,7 +79,7 @@ class _HomeDetailsState extends State<HomeDetails> {
           Get.to(() => DetailsScreen(
                 profileImage: widget.profileImage,
                 selectedComponent: "",
-                productSize: "M",
+                productSize: "",
                 //phone: widget.phoneNumber,
                 product: product,
                 user: widget.user,
@@ -96,9 +97,9 @@ class _HomeDetailsState extends State<HomeDetails> {
               color: Colors.black,
               borderRadius: BorderRadius.circular(15),
               border: Border.all()),
-          height: MediaQuery.of(context).size.height * 1 / 5,
+          height: (MediaQuery.of(context).size.height * 1 / 6).h,
           //100,
-          width: MediaQuery.of(context).size.width,
+          width: (MediaQuery.of(context).size.width).h,
           //* 1/ 4,
           //   decoration: BoxDecoration(
           //      // color: kprimaryColor.withOpacity(0.2),
@@ -114,9 +115,9 @@ class _HomeDetailsState extends State<HomeDetails> {
               children: [
                 Padding(
                   padding: EdgeInsets.only(
-                      left: MediaQuery.of(context).size.height * 1 / 40,
-                      right: MediaQuery.of(context).size.height * 1 / 40.0,
-                      top: MediaQuery.of(context).size.height * 1 / 80),
+                      left: (MediaQuery.of(context).size.height * 1 / 40).h,
+                      right: (MediaQuery.of(context).size.height * 1 / 40.0).h,
+                      top: (MediaQuery.of(context).size.height * 1 / 80).h),
                   child: Container(
                     //  padding: EdgeInsets.only(top:7),
                     height: MediaQuery.of(context).size.height / 9,

@@ -42,7 +42,7 @@ class OrderDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var height = MediaQuery.sizeOf(context).height;
+    //var height = MediaQuery.sizeOf(context).height;
     var width = MediaQuery.sizeOf(context).width;
 
     //final Controller c = Get.put(Controller());

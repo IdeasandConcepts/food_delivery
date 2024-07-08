@@ -9,6 +9,7 @@ import 'package:food_delivery/model/request.dart';
 import 'package:food_delivery/model/user_orders.dart';
 import 'package:food_delivery/model/users.dart';
 import 'package:food_delivery/payment/success_screen.dart';
+import 'package:food_delivery/report/report.dart';
 import 'package:food_delivery/widgets/default_button.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
@@ -46,7 +47,7 @@ class _OrderLastReviewState extends State<OrderLastReview> {
         children: [
           Image.asset(
             "assets/images/background.jpeg",
-            height: 420,
+            height: 330,
           ),
           Container(
             //height: 450,
@@ -61,7 +62,7 @@ class _OrderLastReviewState extends State<OrderLastReview> {
             child: Column(
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, top: 40),
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 20),
                   child: Container(
                     padding: EdgeInsets.only(
                       left: 20,
@@ -162,7 +163,7 @@ class _OrderLastReviewState extends State<OrderLastReview> {
                           _getCurrentLocation().then((value) {
                             lat = double.parse('${value.latitude}');
                             long = double.parse('${value.longitude}');
-                            currentLocation = "latitude" + ":" + "\t" + "$lat" + "\n" + "langtude" + ":" + "\t" + "${long}";
+                            currentLocation = "latitude" + ":" + "\t" + "$lat" + "\n" + "longitude" + ":" + "\t" + "${long}";
                           });
                           //  });
                           // read location
@@ -202,11 +203,40 @@ class _OrderLastReviewState extends State<OrderLastReview> {
                               userCartRequests = [];
                             });
 
-                            Get.to(() => SuccessScreen());
+                            Get.to(() =>
+                            OrderReport(
+                              rtvTasks: Orders(
+                                  profileImage: widget.profileImage,
+                                  step: "In Waiting",
+                                  deliveryTime: (DateFormat('kk:mm')
+                                      .format(DateTime.now())
+                                      .toString()),
+                                  acceptedTime: (DateFormat('kk:mm')
+                                      .format(DateTime.now())
+                                      .toString()),
+                                  id: Random().nextInt(99999999).toDouble(),
+                                  status: "New Order",
+                                  orderNumber:
+                                  Random().nextInt(17565777).toDouble(),
+                                  requests: widget.userOrdersList,
+                                  uTotalPrice: widget.totalAmount,
+                                  paymentMethod: widget.paymentMethod,
+                                  deliveryMethod: widget.deliveryMethod,
+                                  uDate: (DateFormat('yyyy-MM-dd')
+                                      .format(DateTime.now())
+                                      .toString()),
+                                  uTime: (DateFormat('kk:mm')
+                                      .format(DateTime.now())
+                                      .toString()),
+                                  user: widget.user,
+                                  lat: lat,
+                                  lan: long),
+                            ));
+                               // SuccessScreen());
                           }
                         },
                         child: DefualtButton(
-                          text: "Confirm",
+                          text: "Review",
                         ))),
                 Padding(
                   padding: EdgeInsets.only(left: 10, right: 10, top: 10),

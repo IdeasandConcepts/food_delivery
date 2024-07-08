@@ -104,9 +104,10 @@ class _DetailsScreenOneState extends State<DetailsScreenOne> {
           children: [
             Padding(
               padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.height * 1 / 40,
-                  right: MediaQuery.of(context).size.height * 1 / 40.0,
-                  top: MediaQuery.of(context).size.height * 1 / 20),
+                  left: (MediaQuery.of(context).size.height * 1 / 40).h,
+                  right: (MediaQuery.of(context).size.height * 1 / 40.0).h,
+                  top: (MediaQuery.of(context).size.height * 1 / 40).h
+              ),
               child: Text(
                 "Components",
                 style: TextStyle(
@@ -117,11 +118,11 @@ class _DetailsScreenOneState extends State<DetailsScreenOne> {
             ),
             Padding(
               padding: EdgeInsets.only(
-                  left: MediaQuery.of(context).size.height * 1 / 40,
-                  right: MediaQuery.of(context).size.height * 1 / 40.0,
-                  top: MediaQuery.of(context).size.height * 1 / 60),
+                  left: (MediaQuery.of(context).size.height * 1 / 40).h,
+                  right: (MediaQuery.of(context).size.height * 1 / 40).h,
+                  top: (MediaQuery.of(context).size.height * 1 / 70).h),
               child: Container(
-                height: MediaQuery.of(context).size.height * 1 / 16.0,
+                height: (MediaQuery.of(context).size.height * 1 / 18).h,
 
                 // 45,
                 decoration: BoxDecoration(
@@ -129,42 +130,31 @@ class _DetailsScreenOneState extends State<DetailsScreenOne> {
                     borderRadius: BorderRadius.circular(20)),
                 child: TextFormField(
                   controller: detailsController,
-                  textAlign: TextAlign.center,
+                  //textAlign: TextAlign.center,
                   //editing controller of this TextField
                   decoration: InputDecoration(
-                    // disabledBorder: ,
-                    // border: OutlineInputBorder(
-                    //   borderSide: BorderSide(color: kprimaryColor),
-
-                    // height: 45,
-                    // decoration: BoxDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        width: 2,
-                        // color: Colors.amber
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(20),
                       ),
-
-                      // borderSide:
-                      //Border.all(color: kprimaryColor),
-                      borderRadius: BorderRadius.circular(20),
-                      // ),
-                    ),
-                    //fillColor: kprimaryColor,
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Colors.grey,
-                    ),
-
-                    // filled: true,
-                    // labelText: 'id',
-                    labelStyle: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.grey,
-                    ),
-                    hintText: 'Search'.tr,
-                    //labelText: 'Search'.tr,
-                  ),
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                      labelStyle: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      ),
+                      hintText: 'Search'.tr,
+                      hintStyle: TextStyle(
+                        fontSize: 13.sp,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.grey,
+                      )),
                   onSaved: (newValue) => search = newValue!,
                   onChanged: (value) => search = value,
                 ),
@@ -182,24 +172,29 @@ class _DetailsScreenOneState extends State<DetailsScreenOne> {
                         padding: EdgeInsets.only(
                             left: MediaQuery.of(context).size.height * 1 / 30,
                             right: MediaQuery.of(context).size.height * 1 / 30,
-                            top: MediaQuery.of(context).size.height * 1 / 110),
+                            top: MediaQuery.of(context).size.height * 1 / 310),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           //crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              component[index]["item"],
-                              style: TextStyle(
-                                  color: (componentItemsChecked[index])
-                                      ? kprimaryColor
-                                      : Colors.black),
+                            Container(
+                              width:120.w,
+                              child: Text(
+                                component[index]["item"],
+                                style: TextStyle(
+                                    color: (componentItemsChecked[index])
+                                        ? kprimaryColor
+                                        : Colors.black),
+                              ),
                             ),
-                            Text(
-                              "${component[index]["calories"]}",
-                              style: TextStyle(
-                                  color: (componentItemsChecked[index])
-                                      ? kprimaryColor
-                                      : Colors.black),
+                            Container(width:80.w,
+                              child: Text(
+                                "${component[index]["calories"]}",
+                                style: TextStyle(
+                                    color: (componentItemsChecked[index])
+                                        ? kprimaryColor
+                                        : Colors.black),
+                              ),
                             ),
                             Checkbox(
                               checkColor: Colors.white,

@@ -1,4 +1,4 @@
-package com.example.food_delivery;
+package  com.ic.orders;
 
 import io.flutter.embedding.android.FlutterActivity;
 

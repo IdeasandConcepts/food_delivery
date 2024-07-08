@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:food_delivery/home/details.dart';
 import 'package:food_delivery/home/sizes_details.dart';
 import 'package:food_delivery/model/favorite.dart';
@@ -89,39 +90,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
 // ),
 
           Container(
-            height: MediaQuery.of(context).size.height * 1 / 2.85,
-//350.0,
-            width: MediaQuery.of(context).size.width * 1 / 1.5,
-
-//     Image.asset("assets/images/ava.jpeg")
-// ),
+            height: (MediaQuery.of(context).size.height * 1 / 2.89).h,
+            width: (MediaQuery.of(context).size.width * 1 / 1.5).h,
             decoration: BoxDecoration(
               image: DecorationImage(
                 image: AssetImage(
                   widget.product.imageSrc,
-// height:
-// //MediaQuery.of(context).size.height * 1/ 2,
-// 350.0,
-// width:
-// MediaQuery.of(context).size.width * 1/ 1.5,
-// 120.0,
                 ),
-//fit: BoxFit.cover
               ),
             ),
           ),
 
-// SizedBox(height: 10,),
           Text(
-            "_ __ _",
+            "_ __ __ __ _",
             style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 18.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white),
           ),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 1 / 40,
+              top: (MediaQuery.of(context).size.height * 1 / 40).h,
             ),
           ),
 //   ],
@@ -129,7 +118,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
 // ),
           Padding(
             padding: EdgeInsets.only(
-              top: MediaQuery.of(context).size.height * 1 / 220,
+              top: (MediaQuery.of(context).size.height * 1 / 220).h,
             ),
             child: Container(
 //padding: EdgeInsets.only(top:10,bottom:10,left:10.0,right: 10),
@@ -137,17 +126,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   borderRadius: BorderRadius.only(
 //toLeft: Radius.circular(75.0),
                     topRight: Radius.circular(
-                      MediaQuery.of(context).size.height * 1 / 4.5,
+                      (MediaQuery.of(context).size.height * 1 / 4.5).h,
                     ),
                   ),
                   color: Colors.black),
-              height: MediaQuery.of(context).size.height * 1 / 1.7,
+              height: (MediaQuery.of(context).size.height * 1 / 1.7).h,
 //height: MediaQuery.of(context).size.height * 0.55,
 //   height: 550,
               width: MediaQuery.of(context).size.width,
               child: Padding(
                 padding: EdgeInsets.all(
-                  MediaQuery.of(context).size.height * 1 / 60,
+                  (MediaQuery.of(context).size.height * 1 / 60).h,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,19 +144,19 @@ class _DetailsScreenState extends State<DetailsScreen> {
 // SizedBox(height: MediaQuery.of(context).size.height * 1 / 60,),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 1 / 40,
+                        top: (MediaQuery.of(context).size.height * 1 / 180).h,
                       ),
                       child: Container(
 //margin: EdgeInsets.all(8),
                         child: Text(
                           widget.product.title,
-                          style: TextStyle(fontSize: 24, color: Colors.white),
+                          style: TextStyle(fontSize: 24.sp, color: Colors.white),
                         ),
                       ),
                     ),
                     Padding(
                       padding: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 1 / 170,
+                        top: (MediaQuery.of(context).size.height * 1 / 300).h,
                       ),
                       child: Row(
 // crossAxisAlignment: CrossAxisAlignment.start,
@@ -182,27 +171,27 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ],
                                 )
@@ -214,38 +203,38 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: kprimaryColor,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: Colors.white,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                     Icon(
                                       Icons.star,
                                       color: Colors.white,
-                                      size: 30,
+                                      size: 25,
                                     ),
                                   ],
                                 ),
                           Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 0.0, horizontal: 40.0),
+                            padding:  EdgeInsets.symmetric(
+                                vertical: 0.0.w, horizontal: 40.0.h),
                             child: Container(
                               child: Text(
                                 "${widget.product.price}\$",
                                 style: TextStyle(
-                                    fontSize: 40, color: Colors.white),
+                                    fontSize: 30.sp, color: Colors.white),
                               ),
                             ),
                           ),
@@ -286,7 +275,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
+                                      Text((selectedSize!="")?selectedSize:
                                         "Size",
                                         style: TextStyle(
                                           fontSize: 14,
@@ -411,209 +400,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                           ),
                                           IconButton(
                                             onPressed: () async {
-                                              //                                             setState(() {
-                                              // //  return
-                                              //                                               Get.defaultDialog(
-                                              //                                                   title:"Component",
-                                              //                                                   titleStyle:TextStyle(fontSize: 20,color: Colors.black,fontWeight: FontWeight.bold),
-                                              //                                                   content: Container(
-                                              //                                                     height: MediaQuery
-                                              //                                                         .of(context)
-                                              //                                                         .size
-                                              //                                                         .height - 150,
-                                              //                                                     child: Column(
-                                              //                                                       children: [
-                                              //
-                                              //                                                         Padding(
-                                              //                                                           padding:  EdgeInsets.only(
-                                              //                                                             left:MediaQuery.of(context).size.height * 1/ 40,
-                                              //                                                               right: MediaQuery.of(context).size.height * 1/ 40.0,
-                                              //                                                              // top:MediaQuery.of(context).size.height * 1/ 60
-                                              //                                                           ),
-                                              //                                                           child: Container(
-                                              //                                                             height:MediaQuery.of(context).size.height * 1/ 16.0,
-                                              //
-                                              //                                                             // 45,
-                                              //                                                             decoration: BoxDecoration(
-                                              //                                                                 border: Border.all(color: kprimaryColor),
-                                              //                                                                 borderRadius: BorderRadius.circular(20)
-                                              //                                                             ),
-                                              //                                                             child: TextFormField(
-                                              //
-                                              //                                                               controller: detailsController,
-                                              //                                                               textAlign: TextAlign.center,
-                                              //                                                               //editing controller of this TextField
-                                              //                                                               decoration: InputDecoration(
-                                              //                                                                 // disabledBorder: ,
-                                              //                                                                 // border: OutlineInputBorder(
-                                              //                                                                 //   borderSide: BorderSide(color: kprimaryColor),
-                                              //
-                                              //                                                                 // height: 45,
-                                              //                                                                 // decoration: BoxDecoration(
-                                              //                                                                 border: OutlineInputBorder(
-                                              //
-                                              //                                                                   borderSide: BorderSide(
-                                              //                                                                     width: 2,
-                                              //                                                                     // color: Colors.amber
-                                              //                                                                   ),
-                                              //
-                                              //                                                                   // borderSide:
-                                              //                                                                   //Border.all(color: kprimaryColor),
-                                              //                                                                   borderRadius: BorderRadius.circular(20),
-                                              //                                                                   // ),
-                                              //                                                                 ),
-                                              //                                                                 //fillColor: kprimaryColor,
-                                              //                                                                 prefixIcon: Icon(Icons.search,color: Colors.grey,),
-                                              //
-                                              //                                                                 // filled: true,
-                                              //                                                                 // labelText: 'id',
-                                              //                                                                 labelStyle:TextStyle(fontSize: 18,fontWeight: FontWeight.bold,color: Colors.grey,),
-                                              //                                                                 hintText: 'Search'.tr,
-                                              //                                                                 //labelText: 'Search'.tr,
-                                              //                                                               ),
-                                              //                                                               onSaved: (newValue) => search = newValue!,
-                                              //                                                               onChanged: (value) => search = value,
-                                              //
-                                              //                                                             ),
-                                              //                                                           ),
-                                              //                                                         ),
-                                              //                                                         Container(
-                                              //                                                           width: MediaQuery
-                                              //                                                               .of(context)
-                                              //                                                               .size
-                                              //                                                               .width - 50,
-                                              //                                                           height: MediaQuery
-                                              //                                                               .of(context)
-                                              //                                                               .size
-                                              //                                                               .height - 245,
-                                              //                                                           child: ListView.builder(
-                                              //                                                               itemCount: component.length,
-                                              //                                                               itemBuilder: (context,
-                                              //                                                                   index) {
-                                              //                                                                 return
-                                              //                                                                   Padding(
-                                              //                                                                       padding: EdgeInsets
-                                              //                                                                           .only(
-                                              //                                                                           left: MediaQuery
-                                              //                                                                               .of(context)
-                                              //                                                                               .size
-                                              //                                                                               .height *
-                                              //                                                                               1 / 130,
-                                              //                                                                           right: MediaQuery
-                                              //                                                                               .of(context)
-                                              //                                                                               .size
-                                              //                                                                               .height *
-                                              //                                                                               1 / 130,
-                                              //                                                                           top: MediaQuery
-                                              //                                                                               .of(context)
-                                              //                                                                               .size
-                                              //                                                                               .height *
-                                              //                                                                               1 / 210),
-                                              //                                                                       child: Row(
-                                              //                                                                         mainAxisAlignment: MainAxisAlignment
-                                              //                                                                             .spaceBetween,
-                                              // //crossAxisAlignment: CrossAxisAlignment.start,
-                                              //                                                                         children: [
-                                              //                                                                           Text(
-                                              //                                                                             component[index]["item"],
-                                              //                                                                             style: TextStyle(
-                                              //                                                                                 color: (componentItemsChecked[index])
-                                              //                                                                                     ? kprimaryColor
-                                              //                                                                                     : Colors
-                                              //                                                                                     .black),),
-                                              //                                                                           Text(
-                                              //                                                                             "${component[index]["calories"]}",
-                                              //                                                                             style: TextStyle(
-                                              //                                                                                 color: (componentItemsChecked[index])
-                                              //                                                                                     ? kprimaryColor
-                                              //                                                                                     : Colors
-                                              //                                                                                     .black),),
-                                              //                                                                           Checkbox(
-                                              //                                                                             checkColor: Colors
-                                              //                                                                                 .white,
-                                              //                                                                             activeColor: (componentItemsChecked[index] ==
-                                              //                                                                                 true)
-                                              //                                                                                 ? kprimaryColor
-                                              //                                                                                 : Colors
-                                              //                                                                                 .white,
-                                              //                                                                             value: componentItemsChecked[index],
-                                              //                                                                             shape: const RoundedRectangleBorder(
-                                              //                                                                                 borderRadius: BorderRadius
-                                              //                                                                                     .all(
-                                              //                                                                                     Radius
-                                              //                                                                                         .circular(
-                                              //                                                                                         5.0))),
-                                              //                                                                             onChanged: (
-                                              //                                                                                 bool? value) {
-                                              //                                                                               setState(() {
-                                              //                                                                                 componentItemsChecked[index] =
-                                              //                                                                                 value!;
-                                              //                                                                                 selectedComponent.add(component[index]["item"]);
-                                              //                                                                               });
-                                              //                                                                             },
-                                              //                                                                           ),
-                                              //                                                                         ],
-                                              //                                                                       )
-                                              //                                                                   );
-                                              //                                                               }
-                                              //                                                           ),
-                                              //                                                         ),
-                                              //                                                         Padding(  padding:EdgeInsets.only(left:10,right: 10,top: 30),),
-                                              //                                                         Row(
-                                              //                                                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                              //                                                           children: [
-                                              //                                                             Padding(
-                                              //
-                                              //                                                                 padding:EdgeInsets.only(left:10,right: 10),
-                                              //                                                                 child: GestureDetector(
-                                              //                                                                     onTap:(){
-                                              //                                                                      setState(() {
-                                              //                                                                        for(int i=0;i<componentItemsChecked.length;i++)
-                                              //                                                                        {
-                                              //                                                                          componentItemsChecked[i]=false;
-                                              //                                                                          selectedComponent=[];
-                                              //                                                                        }
-                                              //                                                                      });
-                                              //                                                                       Get.back();
-                                              //                                                                     },
-                                              //                                                                     child: Container(
-                                              //                                                                       padding: EdgeInsets.all(5),
-                                              //                                                                       decoration: BoxDecoration(
-                                              //                                                                           color: kprimaryColor,
-                                              //                                                                           borderRadius: BorderRadius.circular(25)),
-                                              //                                                                        width: 120,
-                                              //                                                                       height: 50,
-                                              //                                                                       child: Center(child: Text("Discard", style: TextStyle(
-                                              //                                                                       fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white,),),),)                                                          // DefualtButton(text: "Apply",)),
-                                              //                                                                 )
-                                              //                                                             ),
-                                              //                                                             Padding(
-                                              //                                                                 padding:EdgeInsets.only(left:10,right: 10),
-                                              //                                                                 child: GestureDetector(
-                                              //                                                                     onTap:(){
-                                              //                                                                       Get.back();
-                                              //                                                                     },
-                                              //                                                                     child: Container(
-                                              //                                                                       padding: EdgeInsets.all(5),
-                                              //                                                                      decoration: BoxDecoration(
-                                              //                                                                           color: kprimaryColor,
-                                              //                                                                           borderRadius: BorderRadius.circular(25)),
-                                              //                                                                        width: 120,
-                                              //                                                                       height: 50, child: Center(
-                                              //                                                                       child: Text("Apply", style: TextStyle(
-                                              //                                                                       fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white,),),),)                                                          // DefualtButton(text: "Apply",)),
-                                              //                                                                 )
-                                              //                                                             ),
-                                              //                                                           ],
-                                              //                                                         )
-                                              //
-                                              //
-                                              //                                                       ],
-                                              //                                                     ),
-                                              //                                                   )
-                                              //
-                                              //                                               );
-                                              //                                             });
                                               Get.to(() => DetailsScreenOne(
                                                     profileImage:
                                                         widget.profileImage,
@@ -629,17 +415,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
                                             icon: Icon(Icons.arrow_drop_down),
                                             iconSize: 30,
                                           )
-                                          // StatefulBuilder(
-                                          //   builder: (context,setState){
-                                          //
-                                          //  return
-                                          //
-                                          //
-                                          //  ;
-                                          //   },
-                                          //
-                                          // )
-                                          // icon:Ic
                                         ]),
                                   ),
                                 ),
@@ -650,12 +425,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                       ),
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 1 / 60,
+                      height: (MediaQuery.of(context).size.height * 1 / 60).h,
                     ),
                     Text(
                       "Description",
                       style: TextStyle(
-                          fontSize: 20.0,
+                          fontSize: 20.sp,
                           fontWeight: FontWeight.bold,
 // fontFamily: ,
                           color: Colors.white),
@@ -664,13 +439,13 @@ class _DetailsScreenState extends State<DetailsScreen> {
 //   height:MediaQuery.of(context).size.height * 1 / 210,
 // ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 1 / 5.5,
+                      height: (MediaQuery.of(context).size.height * 1 / 4.1).h,
                       child: SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         child: Text(
                           widget.product.description,
                           style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.w200,
 // fontFamily: ,
                               color: Colors.white),
@@ -679,15 +454,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     ),
 
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 1 / 28,
+                      height: 10.h
+                      //(MediaQuery.of(context).size.height * 1 / 20).h,
                     ),
 
                     MaterialButton(
                       onPressed: () async {
-                        //  for(int x=0;x<widget.selectedComponent.length;x++)
-                        // {
-                        //   selectedComponentStr=selectedComponentStr+"\t"+",";
-                        //  }
                         if (!userCartRequests.contains(UserRequests(
                           pTitle: widget.product.title,
                           pPrice: widget.product.price,
@@ -698,11 +470,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                         ))) {
                           setState(() {
                             userCartRequests.add(
-//                             addUserCartRequests(
+//
                                 UserRequests(
-                              //pImageAssets: pImageAssets, pTitle: pTitle, pPrice: pPrice, pCount: pCount, pSize: pSize, pComponent: pComponent)
-// //pTitle: pTitle, pPrice: pPrice, pCount: pCount, imageAssets: imageAssets, pSize: pSize, pComponent: pComponent)
-                              pTitle: widget.product.title,
+                             pTitle: widget.product.title,
                               pPrice: widget.product.price,
                               pCount: 1,
                               pImageAssets: widget.product.imageSrc,
@@ -711,38 +481,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                             ));
                           });
                         }
-//                         else if(userCartRequests.contains(
-//                             UserRequests(
-//                               pTitle: widget.product.title,
-//                               pPrice: widget.product.price,
-//                               pCount:1,
-//                               pImageAssets: widget.product.imageSrc,
-//                               pSize:widget. productSize,
-//                               pComponent: widget.selectedComponent,)
-//                         )
-//                         ) {
-//                           userCartRequests.remove(
-//                               UserRequests(
-//                                 pTitle: widget.product.title,
-//                                 pPrice: widget.product.price,
-//                                 pCount:1,
-//                                 pImageAssets: widget.product.imageSrc,
-//                                 pSize:widget. productSize,
-//                                 pComponent: widget.selectedComponent,
-//                         ));
-//                           addUserCartRequests(
-// //pTitle: pTitle, pPrice: pPrice, pCount: pCount, imageAssets: imageAssets, pSize: pSize, pComponent: pComponent)
-//                             pTitle: widget.product.title,
-//                             pPrice: widget.product.price,
-//                             pCount: 2,
-//                             imageAssets: widget.product.imageSrc,
-//                             pSize: widget.productSize,
-//                             pComponent: widget.selectedComponent,
-//                           );
 //
-//                         }
                         print(userCartRequests.length);
                         Get.to(() => MyCartScreen(
+                          comeFrom: "Details",
                               //  phoneNumber: widget.phoneNumber,
                               user: widget.user,
                               profileImage: widget.profileImage,

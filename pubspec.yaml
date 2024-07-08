@@ -53,16 +53,19 @@ dependencies:
   package_info_plus: ^4.0.0
   shared_preferences: ^2.2.2
   geolocator: any
+  printing: any
+  rename: ^3.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_launcher_icons: ^0.13.1
+
 flutter_icons:
   android: true
   ios: true
-  image_path: "assets/images/logo.jpeg"
-  adaptive_icon_foreground: "assets/images/1024.jpeg"
+  image_path: "assets/store/logo.png"
+  adaptive_icon_foreground: "assets/store/1024.png"
 
 
 
